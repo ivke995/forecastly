@@ -1,0 +1,17 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.3.15/schema.json",
+	"files": {
+		"includes": [
+			"npm/**",
+			"config/lib/**",
+			"!npm/node_modules",
+			"!config/lib/node_modules"
+		]
+	},
+	"formatter": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true
+	}
+}
