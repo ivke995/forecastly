@@ -23,3 +23,11 @@
 - Keep persisted favorite-city data compatible with the exact `FavoriteCity` shape in `types/city.ts`.
 - Keep weather forecast models in `types/weather.ts` normalized around `WeatherCondition`, `CurrentWeather`, `HourlyForecast`, `DailyForecast`, and aggregate `WeatherForecast` contracts.
 - When a forecast needs city context, reference `City` with a type-only import so the `types/` layer remains erased at runtime.
+
+## Provider-backed Services
+
+- Keep external API clients in repository-root `lib/` as UI-free, framework-light TypeScript modules.
+- Import Forecastly domain contracts with type-only imports and normalize provider payloads into those contracts before returning data to callers.
+- Treat provider JSON as `unknown`: validate top-level payload shape, validate row-level required fields, and drop invalid rows instead of leaking partial domain objects.
+- Distinguish empty/no-result searches from provider failures; return `[]` for empty or no-result searches and throw a typed service error for network, non-OK HTTP, parse, or malformed payload failures.
+- Do not export raw provider response shapes from service modules; keep provider-specific interfaces local unless a wider contract is intentionally introduced.

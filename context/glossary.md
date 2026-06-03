@@ -13,3 +13,6 @@
 - **HourlyForecast**: The hourly forecast-row interface in `types/weather.ts`, using ISO `time`, temperature, optional apparent-temperature/humidity/precipitation/wind fields, and a `WeatherCondition`.
 - **DailyForecast**: The daily forecast-row interface in `types/weather.ts`, using a string `date`, min/max temperatures, optional sunrise/sunset/precipitation/wind summary fields, and a `WeatherCondition`.
 - **WeatherForecast**: The aggregate forecast interface in `types/weather.ts`, linking a `City`, timezone, current conditions, hourly rows, daily rows, and ISO/API-friendly `updatedAt` text.
+- **Geocoding service**: The UI-free external-data service in `lib/geocoding.ts`; it exposes `searchCities(query: string)` and normalizes Open-Meteo geocoding data into `CitySearchResult` objects.
+- **Open-Meteo Geocoding API**: The external provider endpoint used by `lib/geocoding.ts` for city search data.
+- **GeocodingError**: The exported typed error from `lib/geocoding.ts` thrown for geocoding provider, network, parse, or malformed-payload failures.
