@@ -13,3 +13,13 @@
 - Define app background, foreground, and font tokens in `app/globals.css` through Tailwind v4 `@theme inline` mappings.
 - Preserve Geist font variables from `next/font/google`; use `font-sans`/`font-mono` utilities instead of hard-coded component fonts.
 - Keep dark-mode-capable defaults in CSS variables so future UI can rely on `bg-background` and `text-foreground`.
+
+## Domain Model Types
+
+- Keep reusable app-domain interfaces in repository-root `types/` files.
+- Prefer `interface` and type-only exports/imports for domain models; avoid runtime enums, classes, mock values, API calls, and dependency changes in type files.
+- Normalize external weather/geocoding data into Forecastly domain fields instead of copying raw provider response shapes.
+- Represent API/persistence timestamps as ISO/API-friendly `string` fields, not `Date` objects.
+- Keep persisted favorite-city data compatible with the exact `FavoriteCity` shape in `types/city.ts`.
+- Keep weather forecast models in `types/weather.ts` normalized around `WeatherCondition`, `CurrentWeather`, `HourlyForecast`, `DailyForecast`, and aggregate `WeatherForecast` contracts.
+- When a forecast needs city context, reference `City` with a type-only import so the `types/` layer remains erased at runtime.

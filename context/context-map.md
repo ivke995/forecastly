@@ -4,6 +4,8 @@
 - `context/architecture.md` — current architecture notes and diagrams.
 - `context/patterns.md` — established reusable implementation patterns.
 - `context/glossary.md` — project terms and definitions.
+- `context/domain-models/city.md` — city-domain type model contracts and boundaries.
+- `context/domain-models/weather.md` — weather forecast type model contracts and boundaries.
 - `context/plans/` — active implementation plans with task checklists.
 - `context/decisions/` — durable architecture/product decisions.
 - `context/handovers/` — handover notes for transferring work between sessions.

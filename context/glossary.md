@@ -4,3 +4,12 @@
 - **App Router**: Next.js routing model used by the project under the repository-root `app/` directory.
 - **Root layout**: The required App Router layout at `app/layout.tsx`; it defines `<html>`, `<body>`, global metadata, and shared app shell UI.
 - **App shell**: The global Forecastly page chrome rendered by `app/layout.tsx`, currently including the text-only header and constrained main content area.
+- **Domain model types**: TypeScript-only Forecastly app-domain interfaces under `types/`; they define normalized application contracts and do not perform runtime data fetching or mapping.
+- **City**: The canonical city domain interface in `types/city.ts`, including stable identity, display/displayable name data, country/admin metadata, coordinates, and timezone.
+- **CitySearchResult**: A city search-result interface in `types/city.ts` that extends `City` with optional geocoding metadata such as population or elevation.
+- **FavoriteCity**: The exact persisted favorite-city interface in `types/city.ts`, linking a favorite record to a `cityId` and storing ISO/API-friendly `createdAt` text.
+- **WeatherCondition**: The weather condition interface in `types/weather.ts`, using a WMO/Open-Meteo-compatible numeric code plus human-readable label and description text.
+- **CurrentWeather**: The current-conditions interface in `types/weather.ts`, centered on an ISO `time`, temperature data, optional humidity/precipitation/wind/daylight fields, and a `WeatherCondition`.
+- **HourlyForecast**: The hourly forecast-row interface in `types/weather.ts`, using ISO `time`, temperature, optional apparent-temperature/humidity/precipitation/wind fields, and a `WeatherCondition`.
+- **DailyForecast**: The daily forecast-row interface in `types/weather.ts`, using a string `date`, min/max temperatures, optional sunrise/sunset/precipitation/wind summary fields, and a `WeatherCondition`.
+- **WeatherForecast**: The aggregate forecast interface in `types/weather.ts`, linking a `City`, timezone, current conditions, hourly rows, daily rows, and ISO/API-friendly `updatedAt` text.
