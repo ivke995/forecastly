@@ -1,9 +1,9 @@
 import type { City } from "../types/city";
+import { getWeatherCondition } from "./weather-codes";
 import type {
   CurrentWeather,
   DailyForecast,
   HourlyForecast,
-  WeatherCondition,
   WeatherForecast,
 } from "../types/weather";
 
@@ -79,125 +79,6 @@ interface OpenMeteoDailyWeather {
   precipitation_probability_max?: unknown;
   weather_code?: unknown;
 }
-
-type WeatherConditionDetails = Omit<WeatherCondition, "code">;
-
-const WMO_WEATHER_CODE_CONDITIONS: Partial<
-  Record<number, WeatherConditionDetails>
-> = {
-  0: {
-    label: "Clear sky",
-    description: "Cloud-free sky conditions.",
-  },
-  1: {
-    label: "Mainly clear",
-    description: "Mostly clear sky with minimal cloud cover.",
-  },
-  2: {
-    label: "Partly cloudy",
-    description: "Mixed sun and clouds.",
-  },
-  3: {
-    label: "Overcast",
-    description: "Sky fully covered by clouds.",
-  },
-  45: {
-    label: "Fog",
-    description: "Reduced visibility caused by suspended water droplets.",
-  },
-  48: {
-    label: "Depositing rime fog",
-    description: "Fog with rime ice deposits.",
-  },
-  51: {
-    label: "Light drizzle",
-    description: "Light drizzle precipitation.",
-  },
-  53: {
-    label: "Moderate drizzle",
-    description: "Moderate drizzle precipitation.",
-  },
-  55: {
-    label: "Dense drizzle",
-    description: "Dense drizzle precipitation.",
-  },
-  56: {
-    label: "Light freezing drizzle",
-    description: "Light freezing drizzle precipitation.",
-  },
-  57: {
-    label: "Dense freezing drizzle",
-    description: "Dense freezing drizzle precipitation.",
-  },
-  61: {
-    label: "Slight rain",
-    description: "Slight rain precipitation.",
-  },
-  63: {
-    label: "Moderate rain",
-    description: "Moderate rain precipitation.",
-  },
-  65: {
-    label: "Heavy rain",
-    description: "Heavy rain precipitation.",
-  },
-  66: {
-    label: "Light freezing rain",
-    description: "Light freezing rain precipitation.",
-  },
-  67: {
-    label: "Heavy freezing rain",
-    description: "Heavy freezing rain precipitation.",
-  },
-  71: {
-    label: "Slight snow fall",
-    description: "Slight snowfall.",
-  },
-  73: {
-    label: "Moderate snow fall",
-    description: "Moderate snowfall.",
-  },
-  75: {
-    label: "Heavy snow fall",
-    description: "Heavy snowfall.",
-  },
-  77: {
-    label: "Snow grains",
-    description: "Snow grain precipitation.",
-  },
-  80: {
-    label: "Slight rain showers",
-    description: "Slight rain showers.",
-  },
-  81: {
-    label: "Moderate rain showers",
-    description: "Moderate rain showers.",
-  },
-  82: {
-    label: "Violent rain showers",
-    description: "Violent rain showers.",
-  },
-  85: {
-    label: "Slight snow showers",
-    description: "Slight snow showers.",
-  },
-  86: {
-    label: "Heavy snow showers",
-    description: "Heavy snow showers.",
-  },
-  95: {
-    label: "Thunderstorm",
-    description: "Thunderstorm conditions.",
-  },
-  96: {
-    label: "Thunderstorm with slight hail",
-    description: "Thunderstorm with slight hail.",
-  },
-  99: {
-    label: "Thunderstorm with heavy hail",
-    description: "Thunderstorm with heavy hail.",
-  },
-};
 
 export async function getWeatherForecast(
   city: City,
@@ -312,7 +193,7 @@ function normalizeCurrentWeather(
     apparentTemperature,
     relativeHumidity,
     windSpeed,
-    condition: toWeatherCondition(weatherCode),
+    condition: getWeatherCondition(weatherCode),
   };
 }
 
@@ -397,7 +278,7 @@ function normalizeHourlyForecastRow(row: {
     temperature,
     precipitationProbability,
     windSpeed,
-    condition: toWeatherCondition(weatherCode),
+    condition: getWeatherCondition(weatherCode),
   };
 }
 
@@ -484,7 +365,7 @@ function normalizeDailyForecastRow(row: {
     temperatureMin,
     temperatureMax,
     precipitationProbabilityMax,
-    condition: toWeatherCondition(weatherCode),
+    condition: getWeatherCondition(weatherCode),
   };
 }
 
@@ -516,17 +397,6 @@ function asDailyWeather(value: unknown): OpenMeteoDailyWeather {
   }
 
   return value;
-}
-
-function toWeatherCondition(code: number): WeatherCondition {
-  const details = WMO_WEATHER_CODE_CONDITIONS[code];
-
-  return {
-    code,
-    label: details?.label ?? "Unknown weather condition",
-    description:
-      details?.description ?? `Unknown weather condition code ${code}.`,
-  };
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

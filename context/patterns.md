@@ -21,7 +21,7 @@
 - Normalize external weather/geocoding data into Forecastly domain fields instead of copying raw provider response shapes.
 - Represent API/persistence timestamps as ISO/API-friendly `string` fields, not `Date` objects.
 - Keep persisted favorite-city data compatible with the exact `FavoriteCity` shape in `types/city.ts`.
-- Keep weather forecast models in `types/weather.ts` normalized around `WeatherCondition`, `CurrentWeather`, `HourlyForecast`, `DailyForecast`, and aggregate `WeatherForecast` contracts.
+- Keep weather forecast models in `types/weather.ts` normalized around `WeatherCondition`, `CurrentWeather`, `HourlyForecast`, `DailyForecast`, and aggregate `WeatherForecast` contracts. `WeatherCondition` includes `code`, `label`, `description`, `emoji`, and string-union `severity`.
 - When a forecast needs city context, reference `City` with a type-only import so the `types/` layer remains erased at runtime.
 
 ## Provider-backed Services
@@ -32,3 +32,5 @@
 - Distinguish feature-specific empty states from provider failures: geocoding returns `[]` for empty/no-result searches, while forecast services must not return fallback forecasts for malformed required payloads.
 - Throw a typed service error for network, non-OK HTTP, parse, provider, or malformed-payload failures.
 - Do not export raw provider response shapes from service modules; keep provider-specific interfaces local unless a wider contract is intentionally introduced.
+- Keep reusable provider-code/domain mappers in focused UI-free `lib/` helpers instead of duplicating lookup tables inside service modules.
+- Use `lib/weather-codes.ts` as the canonical WMO/Open-Meteo weather-code mapper; weather services should call `getWeatherCondition(code)` rather than maintaining local weather-code tables.

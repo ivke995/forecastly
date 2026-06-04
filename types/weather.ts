@@ -1,9 +1,13 @@
 import type { City } from "./city";
 
+export type WeatherSeverity = "low" | "moderate" | "high" | "severe";
+
 export interface WeatherCondition {
   code: number;
   label: string;
   description: string;
+  emoji: string;
+  severity: WeatherSeverity;
 }
 
 export interface CurrentWeather {

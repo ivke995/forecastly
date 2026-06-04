@@ -7,7 +7,9 @@
 - `context/domain-models/city.md` — city-domain type model contracts and boundaries.
 - `context/domain-models/weather.md` — weather forecast type model contracts and boundaries.
 - `context/services/geocoding.md` — current Open-Meteo city-search service contract, behavior, and boundaries.
+- `context/components/city-search.md` — reusable CitySearch autocomplete Client Component that wraps the geocoding service.
 - `context/services/weather.md` — current Open-Meteo forecast service contract, behavior, request shape, and boundaries.
+- `context/services/weather-codes.md` — canonical WMO/Open-Meteo weather-code mapper contract, supported codes, fallback behavior, and severity policy.
 - `context/plans/` — active implementation plans with task checklists.
 - `context/decisions/` — durable architecture/product decisions.
 - `context/handovers/` — handover notes for transferring work between sessions.

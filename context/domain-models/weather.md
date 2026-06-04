@@ -4,7 +4,8 @@
 
 ## Interfaces
 
-- `WeatherCondition` stores a WMO/Open-Meteo-compatible numeric `code` with human-readable `label` and `description` text.
+- `WeatherSeverity` is the string union `"low" | "moderate" | "high" | "severe"`.
+- `WeatherCondition` stores a WMO/Open-Meteo-compatible numeric `code` with human-readable `label`, `description`, display `emoji`, and `severity` impact metadata.
 - `CurrentWeather` stores an ISO `time`, required temperature, optional apparent-temperature/humidity/precipitation/wind/daylight measurements, and a `WeatherCondition`.
 - `HourlyForecast` stores an ISO `time`, required temperature, optional apparent-temperature/humidity/precipitation probability/precipitation/wind measurements, and a `WeatherCondition`.
 - `DailyForecast` stores a string `date`, min/max temperatures, optional sunrise/sunset/precipitation/wind summary fields, and a `WeatherCondition`.
@@ -17,5 +18,6 @@
 - Weather time, date, and update fields are strings, not `Date` objects.
 - Do not add API clients, fetch calls, raw response mirrors, mappers, weather-code lookup tables, mock data, UI imports, runtime enums, classes, or dependency changes to `types/weather.ts`.
 - Open-Meteo integrations map provider payloads into these Forecastly domain fields; service-specific provider response shapes and weather-code mappers stay outside `types/weather.ts`.
+- `types/weather.ts` defines the shape of weather conditions; `lib/weather-codes.ts` owns runtime WMO/Open-Meteo code lookup and unknown-code fallback behavior.
 
-Related: [city.md](./city.md), [weather service](../services/weather.md), [architecture.md](../architecture.md), [patterns.md](../patterns.md), [glossary.md](../glossary.md)
+Related: [city.md](./city.md), [weather service](../services/weather.md), [weather-code mapper](../services/weather-codes.md), [architecture.md](../architecture.md), [patterns.md](../patterns.md), [glossary.md](../glossary.md)

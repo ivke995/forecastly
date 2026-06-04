@@ -8,14 +8,18 @@
 - **City**: The canonical city domain interface in `types/city.ts`, including stable identity, display/displayable name data, country/admin metadata, coordinates, and timezone.
 - **CitySearchResult**: A city search-result interface in `types/city.ts` that extends `City` with optional geocoding metadata such as population or elevation.
 - **FavoriteCity**: The exact persisted favorite-city interface in `types/city.ts`, linking a favorite record to a `cityId` and storing ISO/API-friendly `createdAt` text.
-- **WeatherCondition**: The weather condition interface in `types/weather.ts`, using a WMO/Open-Meteo-compatible numeric code plus human-readable label and description text.
+- **WeatherCondition**: The weather condition interface in `types/weather.ts`, using a WMO/Open-Meteo-compatible numeric code plus human-readable label, description text, emoji, and severity.
+- **WeatherSeverity**: The string-union weather-impact scale in `types/weather.ts`: `"low" | "moderate" | "high" | "severe"`.
+- **Weather-code mapper**: The UI-free helper in `lib/weather-codes.ts`; it exposes `getWeatherCondition(code: number)` to convert WMO/Open-Meteo numeric weather codes into Forecastly `WeatherCondition` objects.
 - **CurrentWeather**: The current-conditions interface in `types/weather.ts`, centered on an ISO `time`, temperature data, optional humidity/precipitation/wind/daylight fields, and a `WeatherCondition`.
 - **HourlyForecast**: The hourly forecast-row interface in `types/weather.ts`, using ISO `time`, temperature, optional apparent-temperature/humidity/precipitation/wind fields, and a `WeatherCondition`.
 - **DailyForecast**: The daily forecast-row interface in `types/weather.ts`, using a string `date`, min/max temperatures, optional sunrise/sunset/precipitation/wind summary fields, and a `WeatherCondition`.
 - **WeatherForecast**: The aggregate forecast interface in `types/weather.ts`, linking a `City`, timezone, current conditions, hourly rows, daily rows, and ISO/API-friendly `updatedAt` text.
+- **CitySearch**: The reusable autocomplete Client Component in `components/city/CitySearch.tsx`; it wraps `searchCities` with debounced input, keyboard navigation, and loading/empty/error states, calling `onSelect(city: CitySearchResult)` when the user picks a city.
 - **Geocoding service**: The UI-free external-data service in `lib/geocoding.ts`; it exposes `searchCities(query: string)` and normalizes Open-Meteo geocoding data into `CitySearchResult` objects.
 - **Open-Meteo Geocoding API**: The external provider endpoint used by `lib/geocoding.ts` for city search data.
 - **GeocodingError**: The exported typed error from `lib/geocoding.ts` thrown for geocoding provider, network, parse, or malformed-payload failures.
 - **Weather forecast service**: The UI-free external-data service in `lib/open-meteo.ts`; it exposes `getWeatherForecast(city: City)` and normalizes seven-day Open-Meteo forecast data into `WeatherForecast` objects.
 - **Open-Meteo Forecast API**: The external provider endpoint used by `lib/open-meteo.ts` for current, hourly, and daily weather forecast data.
+- **WMO/Open-Meteo weather code**: The numeric weather-condition code returned by Open-Meteo forecast payloads and normalized by `lib/weather-codes.ts`.
 - **WeatherForecastError**: The exported typed error from `lib/open-meteo.ts` thrown for weather forecast API, network, parse, or malformed-payload failures.

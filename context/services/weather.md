@@ -27,12 +27,12 @@
 - `daily[]` includes only complete rows with date, min/max temperature, precipitation probability max, and condition.
 - If hourly or daily provider arrays produce no complete rows, the service rejects the payload instead of returning an invalid fallback forecast.
 - `updatedAt` is set to an ISO/API-friendly string when normalization completes.
-- WMO/Open-Meteo weather codes are mapped locally into `WeatherCondition`; unknown numeric codes preserve the code and use a safe unknown-condition label/description.
+- WMO/Open-Meteo weather codes are mapped through `getWeatherCondition` from `lib/weather-codes.ts`; unknown finite numeric codes preserve the code and use a safe low-severity unknown condition.
 
 ## Boundaries
 
 - The service returns Forecastly domain models, not raw Open-Meteo response shapes.
-- Provider response interfaces and weather-code lookup data remain local to `lib/open-meteo.ts`.
+- Provider response interfaces remain local to `lib/open-meteo.ts`; reusable weather-code lookup data belongs in `lib/weather-codes.ts`.
 - UI rendering, route handlers, geocoding, favorites, persistence, caching/rate limiting, telemetry, mock data, and dependency changes are separate concerns.
 
-Related: [overview.md](../overview.md), [architecture.md](../architecture.md), [patterns.md](../patterns.md), [weather domain models](../domain-models/weather.md), [geocoding service](./geocoding.md)
+Related: [overview.md](../overview.md), [architecture.md](../architecture.md), [patterns.md](../patterns.md), [weather domain models](../domain-models/weather.md), [weather-code mapper](./weather-codes.md), [geocoding service](./geocoding.md)
