@@ -16,3 +16,6 @@
 - **Geocoding service**: The UI-free external-data service in `lib/geocoding.ts`; it exposes `searchCities(query: string)` and normalizes Open-Meteo geocoding data into `CitySearchResult` objects.
 - **Open-Meteo Geocoding API**: The external provider endpoint used by `lib/geocoding.ts` for city search data.
 - **GeocodingError**: The exported typed error from `lib/geocoding.ts` thrown for geocoding provider, network, parse, or malformed-payload failures.
+- **Weather forecast service**: The UI-free external-data service in `lib/open-meteo.ts`; it exposes `getWeatherForecast(city: City)` and normalizes seven-day Open-Meteo forecast data into `WeatherForecast` objects.
+- **Open-Meteo Forecast API**: The external provider endpoint used by `lib/open-meteo.ts` for current, hourly, and daily weather forecast data.
+- **WeatherForecastError**: The exported typed error from `lib/open-meteo.ts` thrown for weather forecast API, network, parse, or malformed-payload failures.

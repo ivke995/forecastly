@@ -16,6 +16,6 @@
 - `types/weather.ts` may reference `City` only with a type-only import.
 - Weather time, date, and update fields are strings, not `Date` objects.
 - Do not add API clients, fetch calls, raw response mirrors, mappers, weather-code lookup tables, mock data, UI imports, runtime enums, classes, or dependency changes to `types/weather.ts`.
-- Future Open-Meteo integrations should map provider payloads into these Forecastly domain fields.
+- Open-Meteo integrations map provider payloads into these Forecastly domain fields; service-specific provider response shapes and weather-code mappers stay outside `types/weather.ts`.
 
-Related: [city.md](./city.md), [architecture.md](../architecture.md), [patterns.md](../patterns.md), [glossary.md](../glossary.md)
+Related: [city.md](./city.md), [weather service](../services/weather.md), [architecture.md](../architecture.md), [patterns.md](../patterns.md), [glossary.md](../glossary.md)

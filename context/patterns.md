@@ -29,5 +29,6 @@
 - Keep external API clients in repository-root `lib/` as UI-free, framework-light TypeScript modules.
 - Import Forecastly domain contracts with type-only imports and normalize provider payloads into those contracts before returning data to callers.
 - Treat provider JSON as `unknown`: validate top-level payload shape, validate row-level required fields, and drop invalid rows instead of leaking partial domain objects.
-- Distinguish empty/no-result searches from provider failures; return `[]` for empty or no-result searches and throw a typed service error for network, non-OK HTTP, parse, or malformed payload failures.
+- Distinguish feature-specific empty states from provider failures: geocoding returns `[]` for empty/no-result searches, while forecast services must not return fallback forecasts for malformed required payloads.
+- Throw a typed service error for network, non-OK HTTP, parse, provider, or malformed-payload failures.
 - Do not export raw provider response shapes from service modules; keep provider-specific interfaces local unless a wider contract is intentionally introduced.
