@@ -17,6 +17,7 @@
 - **WeatherForecast**: The aggregate forecast interface in `types/weather.ts`, linking a `City`, timezone, current conditions, hourly rows, daily rows, and ISO/API-friendly `updatedAt` text.
 - **CitySearch**: The reusable autocomplete Client Component in `components/city/CitySearch.tsx`; it wraps `searchCities` with debounced input, keyboard navigation, and loading/empty/error states, calling `onSelect(city: CitySearchResult)` when the user picks a city.
 - **CurrentWeatherCard**: The reusable display-only Client Component in `components/weather/CurrentWeatherCard.tsx`; it renders a shadcn Card with current weather conditions (city, temperature, feels like, humidity, wind, weather icon/description) received via typed props — no API calls or side effects.
+- **HourlyForecast component**: The reusable display-only Client Component in `components/weather/HourlyForecast.tsx`; it renders a shadcn Card with a horizontally scrollable row of hourly forecast entries (time, weather emoji, temperature, precipitation probability) received via typed props — no API calls or side effects.
 - **Geocoding service**: The UI-free external-data service in `lib/geocoding.ts`; it exposes `searchCities(query: string)` and normalizes Open-Meteo geocoding data into `CitySearchResult` objects.
 - **Open-Meteo Geocoding API**: The external provider endpoint used by `lib/geocoding.ts` for city search data.
 - **GeocodingError**: The exported typed error from `lib/geocoding.ts` thrown for geocoding provider, network, parse, or malformed-payload failures.

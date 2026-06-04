@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import CitySearch from "@/components/city/CitySearch";
+import HourlyForecast from "@/components/weather/HourlyForecast";
 import { getWeatherForecast, WeatherForecastError } from "@/lib/open-meteo";
 import type { CitySearchResult } from "@/types/city";
 import type { WeatherForecast } from "@/types/weather";
@@ -67,15 +68,13 @@ export default function Home() {
           </div>
         )}
 
-        {/* Selected city info + raw JSON forecast */}
+        {/* Selected city info + hourly forecast */}
         {!isLoading && forecast !== null && selectedCity !== null && (
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold tracking-tight">
               {selectedCity.displayName}
             </h2>
-            <pre className="max-h-96 overflow-auto rounded-lg border border-foreground/10 bg-foreground/5 p-4 text-left text-xs leading-relaxed">
-              {JSON.stringify(forecast, null, 2)}
-            </pre>
+            <HourlyForecast hourly={forecast.hourly.slice(0, 24)} />
           </div>
         )}
       </div>
