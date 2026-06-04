@@ -16,6 +16,7 @@
 - **DailyForecast**: The daily forecast-row interface in `types/weather.ts`, using a string `date`, min/max temperatures, optional sunrise/sunset/precipitation/wind summary fields, and a `WeatherCondition`.
 - **WeatherForecast**: The aggregate forecast interface in `types/weather.ts`, linking a `City`, timezone, current conditions, hourly rows, daily rows, and ISO/API-friendly `updatedAt` text.
 - **CitySearch**: The reusable autocomplete Client Component in `components/city/CitySearch.tsx`; it wraps `searchCities` with debounced input, keyboard navigation, and loading/empty/error states, calling `onSelect(city: CitySearchResult)` when the user picks a city.
+- **CurrentWeatherCard**: The reusable display-only Client Component in `components/weather/CurrentWeatherCard.tsx`; it renders a shadcn Card with current weather conditions (city, temperature, feels like, humidity, wind, weather icon/description) received via typed props — no API calls or side effects.
 - **Geocoding service**: The UI-free external-data service in `lib/geocoding.ts`; it exposes `searchCities(query: string)` and normalizes Open-Meteo geocoding data into `CitySearchResult` objects.
 - **Open-Meteo Geocoding API**: The external provider endpoint used by `lib/geocoding.ts` for city search data.
 - **GeocodingError**: The exported typed error from `lib/geocoding.ts` thrown for geocoding provider, network, parse, or malformed-payload failures.
@@ -23,3 +24,7 @@
 - **Open-Meteo Forecast API**: The external provider endpoint used by `lib/open-meteo.ts` for current, hourly, and daily weather forecast data.
 - **WMO/Open-Meteo weather code**: The numeric weather-condition code returned by Open-Meteo forecast payloads and normalized by `lib/weather-codes.ts`.
 - **WeatherForecastError**: The exported typed error from `lib/open-meteo.ts` thrown for weather forecast API, network, parse, or malformed-payload failures.
+- **shadcn/ui**: A UI component library that generates customizable, unstyled primitives in the project's `components/ui/` directory. Configured via `components.json` with the `base-nova` style.
+- **Base-nova**: The shadcn/ui style preset selected during init. Uses CSS variables for theming with the `base-nova` component patterns.
+- **components.json**: The root-level shadcn/ui configuration file defining style, aliases, Tailwind settings, and icon library.
+- **cn()**: The utility function in `lib/utils.ts` that merges Tailwind class names using `clsx` and `tailwind-merge`. Used throughout shadcn components and available for feature components.

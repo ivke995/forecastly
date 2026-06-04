@@ -34,3 +34,10 @@
 - Do not export raw provider response shapes from service modules; keep provider-specific interfaces local unless a wider contract is intentionally introduced.
 - Keep reusable provider-code/domain mappers in focused UI-free `lib/` helpers instead of duplicating lookup tables inside service modules.
 - Use `lib/weather-codes.ts` as the canonical WMO/Open-Meteo weather-code mapper; weather services should call `getWeatherCondition(code)` rather than maintaining local weather-code tables.
+
+## shadcn/ui Components
+
+- Add new shadcn primitives via the CLI (`npx shadcn@latest add <component>`) rather than manually copying files.
+- Keep shadcn-generated files under `components/ui/` unmodified — do not edit them directly. Wrap or compose them in feature-specific components under `components/<domain>/` if customization is needed.
+- Import shadcn components using the `@/components/ui/` alias.
+- Use `cn()` from `@/lib/utils` for className merging in feature components; it is already available and consistent with shadcn conventions.

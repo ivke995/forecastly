@@ -12,4 +12,7 @@
 - `app/layout.tsx` defines static Forecastly metadata and the shared root app shell.
 - The shell renders a text-only Forecastly header above a `main` content region constrained to `max-w-[1200px]` with responsive padding.
 - `app/page.tsx` is a `'use client'` component that integrates `CitySearch` for city selection and calls `getWeatherForecast` on selection. It manages `selectedCity`, `forecast`, `isLoading`, and `error` state with `useState`/`useCallback`. On city selection, the page fetches a seven-day forecast via `getWeatherForecast`. A loading spinner is shown during the fetch. On `WeatherForecastError`, the error message is displayed inside a styled error banner. On success, the city `displayName` and raw `JSON.stringify` output are rendered inside a styled `<pre>` block. Before any city is selected, the onboarding placeholder is visible.
-- `app/globals.css` defines Tailwind v4 theme tokens for background, foreground, and Geist font variables, including dark-mode color defaults.
+- `app/globals.css` defines Tailwind v4 theme tokens for background, foreground, and Geist font variables, including dark-mode color defaults. It also imports `shadcn/tailwind.css` and `tw-animate-css` for shadcn/ui theming and animations.
+- `components/ui/` houses reusable shadcn/ui component primitives (Card, Button, etc.). These are installed via the shadcn CLI (`npx shadcn@latest add <component>`) and are the building blocks for feature-specific UI components.
+- `lib/utils.ts` provides the `cn()` utility (clsx + tailwind-merge) used by shadcn components and available for project-wide className merging.
+- `components.json` at the repository root configures the shadcn/ui CLI (style, aliases, icon library, Tailwind settings).
