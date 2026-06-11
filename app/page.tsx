@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import CitySearch from "@/components/city/CitySearch";
+import DailyForecast from "@/components/weather/DailyForecast";
 import HourlyForecast from "@/components/weather/HourlyForecast";
 import { getWeatherForecast, WeatherForecastError } from "@/lib/open-meteo";
 import type { CitySearchResult } from "@/types/city";
@@ -75,6 +76,7 @@ export default function Home() {
               {selectedCity.displayName}
             </h2>
             <HourlyForecast hourly={forecast.hourly.slice(0, 24)} />
+            <DailyForecast daily={forecast.daily} />
           </div>
         )}
       </div>

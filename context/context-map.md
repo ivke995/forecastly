@@ -9,6 +9,7 @@
 - `context/services/geocoding.md` — current Open-Meteo city-search service contract, behavior, and boundaries.
 - `context/components/city-search.md` — reusable CitySearch autocomplete Client Component that wraps the geocoding service.
 - `context/components/current-weather-card.md` — reusable CurrentWeatherCard display-only Client Component with shadcn Card and typed weather props.
+- `context/components/daily-forecast.md` — reusable DailyForecast display-only Client Component with shadcn Card and responsive daily forecast grid/scroll layout.
 - `context/components/hourly-forecast.md` — reusable HourlyForecast display-only Client Component with shadcn Card and horizontally scrollable hourly forecast entries.
 - `context/components/shadcn-ui.md` — shadcn/ui component library configuration, available primitives, and usage patterns.
 - `context/services/weather.md` — current Open-Meteo forecast service contract, behavior, request shape, and boundaries.
