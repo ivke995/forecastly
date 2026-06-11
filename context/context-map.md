@@ -14,6 +14,7 @@
 - `context/components/shadcn-ui.md` — shadcn/ui component library configuration, available primitives, and usage patterns.
 - `context/services/weather.md` — current Open-Meteo forecast service contract, behavior, request shape, and boundaries.
 - `context/services/weather-codes.md` — canonical WMO/Open-Meteo weather-code mapper contract, supported codes, fallback behavior, and severity policy.
+- `context/hooks/use-favorites.md` — SSR-safe `useFavorites()` hook for localStorage-backed favorite cities persistence.
 - `context/plans/` — active implementation plans with task checklists.
 - `context/decisions/` — durable architecture/product decisions.
 - `context/handovers/` — handover notes for transferring work between sessions.
