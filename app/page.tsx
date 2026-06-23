@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import CitySearch from "@/components/city/CitySearch";
+import CurrentWeatherCard from "@/components/weather/CurrentWeatherCard";
 import DailyForecast from "@/components/weather/DailyForecast";
 import HourlyForecast from "@/components/weather/HourlyForecast";
 import { getWeatherForecast, WeatherForecastError } from "@/lib/open-meteo";
@@ -69,12 +70,25 @@ export default function Home() {
           </div>
         )}
 
-        {/* Selected city info + hourly forecast */}
+        {/* Selected city info + weather forecast */}
         {!isLoading && forecast !== null && selectedCity !== null && (
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold tracking-tight">
               {selectedCity.displayName}
             </h2>
+            <CurrentWeatherCard
+              cityName={forecast.city.name}
+              country={forecast.city.country}
+              temperature={forecast.current.temperature}
+              feelsLike={
+                forecast.current.apparentTemperature ??
+                forecast.current.temperature
+              }
+              humidity={forecast.current.relativeHumidity ?? 0}
+              windSpeed={forecast.current.windSpeed ?? 0}
+              weatherIcon={forecast.current.condition.emoji}
+              weatherDescription={forecast.current.condition.description}
+            />
             <HourlyForecast hourly={forecast.hourly.slice(0, 24)} />
             <DailyForecast daily={forecast.daily} />
           </div>
