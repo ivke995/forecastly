@@ -8,6 +8,7 @@
 - `context/domain-models/weather.md` — weather forecast type model contracts and boundaries.
 - `context/services/geocoding.md` — current Open-Meteo city-search service contract, behavior, and boundaries.
 - `context/components/city-search.md` — reusable CitySearch autocomplete Client Component that wraps the geocoding service.
+- `context/components/favorite-cities.md` — reusable FavoriteCities display Client Component with shadcn Card, favorite list, click-to-select, and remove actions.
 - `context/components/current-weather-card.md` — reusable CurrentWeatherCard display-only Client Component with shadcn Card and typed weather props.
 - `context/components/daily-forecast.md` — reusable DailyForecast display-only Client Component with shadcn Card and responsive daily forecast grid/scroll layout.
 - `context/components/hourly-forecast.md` — reusable HourlyForecast display-only Client Component with shadcn Card and horizontally scrollable hourly forecast entries.

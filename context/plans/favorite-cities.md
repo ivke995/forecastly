@@ -56,7 +56,7 @@ This plan adds:
   - **Files changed:** `hooks/useFavorites.ts`
   - **Evidence:** `npm run lint` clean, `npx tsc --noEmit` passed
 
-- [ ] T02: `Create FavoriteCities component` (status:todo)
+- [x] T02: `Create FavoriteCities component` (status:done)
   - Task ID: T02
   - Goal: Build a `FavoriteCities` display/list component that renders the user's saved favorites inside a shadcn Card with click-to-select and remove actions.
   - Boundaries (in/out of scope):
@@ -73,6 +73,9 @@ This plan adds:
     - Empty state: "No favorite cities yet. Search for a city and star it!" when list is empty.
     - TypeScript compiles without errors.
   - Verification notes (commands or checks): `npx tsc --noEmit` passes; `npm run lint` passes; review the component rendering.
+  - **Completed:** 2026-06-11
+  - **Files changed:** `components/city/FavoriteCities.tsx`
+  - **Evidence:** `npx tsc --noEmit` clean, `npm run lint` clean
 
 - [ ] T03: `Integrate favorites into app/page.tsx` (status:todo)
   - Task ID: T03
