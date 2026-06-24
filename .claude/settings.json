@@ -1,31 +1,23 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "hooks": {
     "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "sce",
-            "args": [
-              "hooks",
-              "claude-capture",
-              "SessionStart"
-            ]
+            "command": "sce hooks session-model"
           }
         ]
       }
     ],
-    "UserPromptSubmit": [
+    "PreToolUse": [
       {
+        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "sce",
-            "args": [
-              "hooks",
-              "claude-capture",
-              "UserPromptSubmit"
-            ]
+            "command": "sce policy bash"
           }
         ]
       }
@@ -36,12 +28,25 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sce",
-            "args": [
-              "hooks",
-              "claude-capture",
-              "PostToolUse"
-            ]
+            "command": "sce hooks diff-trace"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sce hooks conversation-trace"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sce hooks conversation-trace"
           }
         ]
       }
@@ -51,12 +56,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sce",
-            "args": [
-              "hooks",
-              "claude-capture",
-              "Stop"
-            ]
+            "command": "sce hooks conversation-trace"
           }
         ]
       }
