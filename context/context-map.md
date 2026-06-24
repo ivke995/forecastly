@@ -18,6 +18,7 @@
 - `context/services/weather-codes.md` — canonical WMO/Open-Meteo weather-code mapper contract, supported codes, fallback behavior, and severity policy.
 - `context/hooks/use-favorites.md` — SSR-safe `useFavorites()` hook for localStorage-backed favorite cities persistence.
 - `context/services/weather-recommendations.md` — deterministic weather-recommendation helper contract, rule thresholds, and boundaries.
+- `context/services/weather-risk-badges.md` — deterministic current-weather risk badge helper contract, thresholds, output metadata, and boundaries.
 - `context/plans/` — active implementation plans with task checklists.
 - `context/decisions/` — durable architecture/product decisions.
 - `context/handovers/` — handover notes for transferring work between sessions.
