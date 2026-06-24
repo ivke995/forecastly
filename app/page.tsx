@@ -8,6 +8,7 @@ import HourlyForecast from "@/components/weather/HourlyForecast";
 import WeatherRecommendations from "@/components/weather/WeatherRecommendations";
 import { getWeatherForecast, WeatherForecastError } from "@/lib/open-meteo";
 import { getWeatherRecommendations } from "@/lib/weather-recommendations";
+import { getCurrentWeatherRiskBadges } from "@/lib/weather-risk-badges";
 import type { CitySearchResult } from "@/types/city";
 import type { WeatherForecast } from "@/types/weather";
 
@@ -90,6 +91,7 @@ export default function Home() {
               windSpeed={forecast.current.windSpeed ?? 0}
               weatherIcon={forecast.current.condition.emoji}
               weatherDescription={forecast.current.condition.description}
+              riskBadges={getCurrentWeatherRiskBadges(forecast.current)}
             />
             <WeatherRecommendations
               recommendations={getWeatherRecommendations(forecast)}

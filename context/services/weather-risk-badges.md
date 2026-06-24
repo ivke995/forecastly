@@ -29,7 +29,7 @@
 
 ## Boundaries
 
-- Rendering belongs to `CurrentWeatherCard` or caller wiring in a later task.
+- Rendering belongs to `CurrentWeatherCard`; `app/page.tsx` derives badges from `forecast.current` and passes them into the card.
 - Hourly/daily risk badges are out of scope for this helper.
 - Open-Meteo request and normalization behavior remains unchanged.
 

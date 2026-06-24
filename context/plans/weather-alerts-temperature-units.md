@@ -47,12 +47,16 @@ Client-side conversion is the preferred approach for this iteration because Fore
   - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed; `npm run build` passed.
   - Notes: Added deterministic, UI-free current-weather risk badge helper with exported badge metadata/types and thresholds for heavy precipitation, strong wind/gusts, and extreme heat/cold. No React rendering, hourly/daily support, or provider/API changes.
 
-- [ ] T02: `Render current-weather risk badges` (status:todo)
+- [x] T02: `Render current-weather risk badges` (status:done)
   - Task ID: T02
   - Goal: Extend `CurrentWeatherCard` to accept and render risk badges in a compact, accessible way.
   - Boundaries (in/out of scope): In - prop additions, card layout update, styling using existing Tailwind/shadcn patterns, app/page wiring from current forecast to badge helper. Out - alerts outside the current weather card, notification behavior, hourly/daily rendering changes.
   - Done when: Current weather card shows readable badges only when derived current risks exist and preserves existing layout when there are no badges.
   - Verification notes (commands or checks): Run targeted lint/typecheck; manually verify current card layout with no risks and multiple risks at mobile and desktop widths.
+  - Completed: 2026-06-24
+  - Files changed: `components/weather/CurrentWeatherCard.tsx`, `app/page.tsx`
+  - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed; `npm run build` passed.
+  - Notes: Added optional `riskBadges` prop and compact accessible current-risk badge region inside `CurrentWeatherCard`; `app/page.tsx` derives badges from `forecast.current` via `getCurrentWeatherRiskBadges`. No hourly/daily badge rendering, notifications, or provider/API changes.
 
 - [ ] T03: `Add temperature unit preference state` (status:todo)
   - Task ID: T03
