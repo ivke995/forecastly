@@ -30,3 +30,5 @@
 - **Base-nova**: The shadcn/ui style preset selected during init. Uses CSS variables for theming with the `base-nova` component patterns.
 - **components.json**: The root-level shadcn/ui configuration file defining style, aliases, Tailwind settings, and icon library.
 - **cn()**: The utility function in `lib/utils.ts` that merges Tailwind class names using `clsx` and `tailwind-merge`. Used throughout shadcn components and available for feature components.
+- **Weather recommendations helper**: The UI-free deterministic rule utility in `lib/weather-recommendations.ts`; it exposes `getWeatherRecommendations(forecast: WeatherForecast)` returning a stable-ordered list of advice items (umbrella, sunscreen, windy, humidity, severe alert, good running weather) derived from existing normalized forecast fields — no API calls or side effects.
+- **WeatherRecommendation**: The typed advice item interface from `lib/weather-recommendations.ts` with `id`, `icon`, `title`, and `description` fields.

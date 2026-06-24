@@ -47,12 +47,15 @@ Wire the existing `CurrentWeatherCard` into `app/page.tsx` so selected-city resu
   - Files changed: `app/page.tsx`, `context/overview.md`, `context/architecture.md`, `context/components/current-weather-card.md`
   - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed; `npm run build` passed; context sync completed; `CurrentWeatherCard` renders before hourly/daily forecast cards with optional current-weather fallbacks.
 
-- [ ] T02: `Add deterministic recommendation logic` (status:todo)
+- [x] T02: `Add deterministic recommendation logic` (status:done)
   - Task ID: T02
   - Goal: Create a small UI-free recommendation helper that converts an existing `WeatherForecast` into a stable list of recommendation items.
   - Boundaries (in/out of scope): In — a focused helper under `lib/` or a weather-domain utility file; typed recommendation item shape; deterministic threshold rules for rain/umbrella, sunscreen/heat, wind, humidity/comfort, severe conditions, and good running weather. Out — React rendering, new API calls, model-wide rewrites, persistence, user preferences, ML/AI recommendation services.
   - Done when: Recommendation logic returns concise advice labels/messages from normalized forecast fields; rules tolerate missing optional values; output order is stable and capped to a reasonable count for UI display.
   - Verification notes (commands or checks): Run `npx tsc --noEmit`; review helper with representative inputs for rainy, sunny/hot, windy, severe, humid, and mild/low-wind scenarios.
+	  - Completed: 2026-06-24
+	  - Files changed: `lib/weather-recommendations.ts`
+	  - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed; verified with representative inputs for rainy, sunny/hot, windy, thunderstorm/severe, humid, mild/missing-optional scenarios; all rules return expected recommendations.
 
 - [ ] T03: `Render weather recommendations on home page` (status:todo)
   - Task ID: T03
