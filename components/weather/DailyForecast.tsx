@@ -7,9 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { DailyForecast as DailyForecastType } from "@/types/weather";
+import type { TemperatureUnit } from "@/hooks/useTemperatureUnit";
+import { convertTemperature } from "@/hooks/useTemperatureUnit";
 
 export interface DailyForecastProps {
   daily: DailyForecastType[];
+  unit: TemperatureUnit;
 }
 
 function formatDay(dateStr: string): string {
@@ -35,7 +38,7 @@ function formatFullDate(dateStr: string): string {
   });
 }
 
-export default function DailyForecast({ daily }: DailyForecastProps) {
+export default function DailyForecast({ daily, unit }: DailyForecastProps) {
   return (
     <Card>
       <CardHeader>
@@ -67,10 +70,12 @@ export default function DailyForecast({ daily }: DailyForecastProps) {
               </span>
               <div className="flex items-baseline gap-1.5">
                 <span className="text-sm font-semibold">
-                  {Math.round(day.temperatureMax)}°
+                  {convertTemperature(day.temperatureMax, unit)}
+                  {unit === "celsius" ? "°C" : "°F"}
                 </span>
                 <span className="text-xs text-muted-foreground">
-                  {Math.round(day.temperatureMin)}°
+                  {convertTemperature(day.temperatureMin, unit)}
+                  {unit === "celsius" ? "°C" : "°F"}
                 </span>
               </div>
               {day.precipitationProbabilityMax !== undefined && (

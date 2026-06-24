@@ -93,13 +93,14 @@ export default function Home() {
               windSpeed={forecast.current.windSpeed ?? 0}
               weatherIcon={forecast.current.condition.emoji}
               weatherDescription={forecast.current.condition.description}
+              unit={unit}
               riskBadges={getCurrentWeatherRiskBadges(forecast.current)}
             />
             <WeatherRecommendations
               recommendations={getWeatherRecommendations(forecast)}
             />
-            <HourlyForecast hourly={forecast.hourly.slice(0, 24)} />
-            <DailyForecast daily={forecast.daily} />
+            <HourlyForecast hourly={forecast.hourly.slice(0, 24)} unit={unit} />
+            <DailyForecast daily={forecast.daily} unit={unit} />
           </div>
         )}
       </div>

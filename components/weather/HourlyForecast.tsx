@@ -7,9 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { HourlyForecast as HourlyForecastType } from "@/types/weather";
+import type { TemperatureUnit } from "@/hooks/useTemperatureUnit";
+import { convertTemperature } from "@/hooks/useTemperatureUnit";
 
 export interface HourlyForecastProps {
   hourly: HourlyForecastType[];
+  unit: TemperatureUnit;
 }
 
 function formatHour(isoTime: string): string {
@@ -25,7 +28,7 @@ function formatHour(isoTime: string): string {
   });
 }
 
-export default function HourlyForecast({ hourly }: HourlyForecastProps) {
+export default function HourlyForecast({ hourly, unit }: HourlyForecastProps) {
   return (
     <Card>
       <CardHeader>
@@ -54,7 +57,8 @@ export default function HourlyForecast({ hourly }: HourlyForecastProps) {
                 {hour.condition.emoji}
               </span>
               <span className="text-sm font-semibold">
-                {Math.round(hour.temperature)}°
+                {convertTemperature(hour.temperature, unit)}
+                {unit === "celsius" ? "°C" : "°F"}
               </span>
               {hour.precipitationProbability !== undefined && (
                 <span className="text-xs text-muted-foreground">

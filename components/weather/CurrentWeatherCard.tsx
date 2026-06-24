@@ -8,6 +8,8 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import type { WeatherRiskBadge } from "@/lib/weather-risk-badges";
+import type { TemperatureUnit } from "@/hooks/useTemperatureUnit";
+import { convertTemperature } from "@/hooks/useTemperatureUnit";
 
 export interface CurrentWeatherCardProps {
   cityName: string;
@@ -18,6 +20,7 @@ export interface CurrentWeatherCardProps {
   windSpeed: number;
   weatherIcon: string;
   weatherDescription: string;
+  unit: TemperatureUnit;
   riskBadges?: WeatherRiskBadge[];
 }
 
@@ -37,6 +40,7 @@ export default function CurrentWeatherCard({
   windSpeed,
   weatherIcon,
   weatherDescription,
+  unit,
   riskBadges = [],
 }: CurrentWeatherCardProps) {
   const hasRiskBadges = riskBadges.length > 0;
@@ -59,7 +63,10 @@ export default function CurrentWeatherCard({
           >
             {weatherIcon}
           </span>
-          <span className="text-4xl font-bold">{temperature}°</span>
+          <span className="text-4xl font-bold">
+            {convertTemperature(temperature, unit)}
+            {unit === "celsius" ? "°C" : "°F"}
+          </span>
         </div>
 
         {hasRiskBadges && (
@@ -91,7 +98,10 @@ export default function CurrentWeatherCard({
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           <div className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2">
             <span className="text-sm text-muted-foreground">Feels like</span>
-            <span className="text-sm font-medium">{feelsLike}°</span>
+            <span className="text-sm font-medium">
+              {convertTemperature(feelsLike, unit)}
+              {unit === "celsius" ? "°C" : "°F"}
+            </span>
           </div>
           <div className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2">
             <span className="text-sm text-muted-foreground">Humidity</span>

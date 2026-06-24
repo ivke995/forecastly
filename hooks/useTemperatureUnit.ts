@@ -34,6 +34,18 @@ function storeUnit(unit: TemperatureUnit): void {
   }
 }
 
+/**
+ * Convert a Celsius temperature value to the specified unit.
+ * Fahrenheit conversion uses the standard formula: °F = °C * 9/5 + 32.
+ * Result is rounded with Math.round, consistent with existing display patterns.
+ */
+export function convertTemperature(celsius: number, unit: TemperatureUnit): number {
+  if (unit === "fahrenheit") {
+    return Math.round(celsius * (9 / 5) + 32);
+  }
+  return Math.round(celsius);
+}
+
 export function useTemperatureUnit() {
   const [unit, setUnitState] = useState<TemperatureUnit>(() =>
     getStoredUnit(),

@@ -69,12 +69,16 @@ Client-side conversion is the preferred approach for this iteration because Fore
   - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed (2 expected unused-variable warnings); `npm run build` passed.
   - Notes: Added `hooks/useTemperatureUnit.ts` with SSR-safe localStorage persistence following the `useFavorites` pattern — lazy useState initializer, typeof window guard, try/catch for storage errors, invalid-value fallback to celsius. Exports `TemperatureUnit` type, `useTemperatureUnit()` hook returning `{ unit, setUnit, toggleUnit }`, and defaults to "celsius". Wired `unit` and `toggleUnit` into `app/page.tsx` for downstream use in T04/T05.
 
-- [ ] T04: `Apply selected unit to forecast temperature displays` (status:todo)
+- [x] T04: `Apply selected unit to forecast temperature displays` (status:done)
   - Task ID: T04
   - Goal: Convert and label displayed temperatures consistently across current, hourly, and daily forecast UI.
   - Boundaries (in/out of scope): In - display conversion helpers, unit label/formatting, props or wiring changes for `CurrentWeatherCard`, `HourlyForecast`, and `DailyForecast`. Out - changing stored domain model units, changing Open-Meteo request params, changing wind speed units.
   - Done when: Current temperature, feels-like temperature, hourly temperatures, and daily min/max temperatures all reflect the selected unit with correct labels/symbols.
   - Verification notes (commands or checks): Run lint/typecheck; manually compare a sample Celsius value with its Fahrenheit conversion in all three forecast sections.
+  - Completed: 2026-06-24
+  - Files changed: `hooks/useTemperatureUnit.ts`, `components/weather/CurrentWeatherCard.tsx`, `components/weather/HourlyForecast.tsx`, `components/weather/DailyForecast.tsx`, `app/page.tsx`
+  - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed (1 expected unused-variable warning for `toggleUnit`); `npm run build` passed.
+  - Notes: Added `convertTemperature()` helper to `hooks/useTemperatureUnit.ts`, exported alongside `TemperatureUnit` type and `useTemperatureUnit` hook. Added `unit` prop to `CurrentWeatherCard`, `HourlyForecast`, and `DailyForecast`; each component converts Celsius to the selected unit and displays `°C`/`°F` suffix. Wired `unit` from `page.tsx` into all three forecast display components.
 
 - [ ] T05: `Add temperature unit toggle UI` (status:todo)
   - Task ID: T05
