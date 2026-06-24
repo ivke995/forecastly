@@ -36,6 +36,13 @@
 - Use `lib/weather-codes.ts` as the canonical WMO/Open-Meteo weather-code mapper; weather services should call `getWeatherCondition(code)` rather than maintaining local weather-code tables.
 - Keep forecast-derived display metadata helpers UI-free and deterministic in `lib/`; they should return typed data for components to render later and avoid React imports, storage access, provider calls, or provider request changes.
 
+## Client-side Weather Display Preferences
+
+- Keep normalized forecast temperatures in Celsius from the provider/service layer; display-only unit conversion belongs in client UI helpers/components.
+- Use `useTemperatureUnit()` for the persisted Celsius/Fahrenheit preference and pass the selected `unit` from `app/page.tsx` into weather display components.
+- Use `convertTemperature(celsius, unit)` for current, feels-like, hourly, and daily min/max temperature displays; do not refetch forecasts solely because the display unit changed.
+- Keep persistence SSR-safe with `typeof window` guards and default to Celsius for missing or invalid stored values.
+
 ## shadcn/ui Components
 
 - Add new shadcn primitives via the CLI (`npx shadcn@latest add <component>`) rather than manually copying files.

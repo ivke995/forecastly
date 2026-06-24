@@ -91,13 +91,48 @@ Client-side conversion is the preferred approach for this iteration because Fore
   - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed; `npm run build` passed.
   - Notes: Added an outline shadcn `Button` beside the selected-city heading in the forecast view. It calls the existing `toggleUnit` state updater, keeps the selected forecast in memory, and exposes an accessible label for switching to the alternate temperature unit. No provider request or persistence changes were made.
 
-- [ ] T06: `Validation and cleanup` (status:todo)
+- [x] T06: `Validation and cleanup` (status:done)
   - Task ID: T06
   - Goal: Validate the completed feature set, remove temporary scaffolding, and sync durable context for future sessions.
   - Boundaries (in/out of scope): In - full relevant checks, UI smoke testing, context updates for changed components/helpers/patterns/glossary. Out - new feature expansion beyond current-weather risk badges and temperature units.
   - Done when: All implemented tasks pass verification, no temporary debug code remains, plan statuses/evidence are current, and `context/` reflects the resulting current state.
   - Verification notes (commands or checks): Run the repository's full lint/typecheck/test/build checks as available; verify current-weather badges and Celsius/Fahrenheit persistence manually; update relevant context files such as `overview.md`, component docs, patterns, glossary, and any new helper docs.
+  - Completed: 2026-06-24
+  - Files changed: `context/plans/weather-alerts-temperature-units.md`, `context/components/current-weather-card.md`, `context/components/hourly-forecast.md`, `context/components/daily-forecast.md`, `context/context-map.md`, `context/patterns.md`
+  - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed; `npm run build` passed. `npm test` is unavailable because `package.json` has no `test` script. Code inspection confirmed current-weather badges are derived from `forecast.current`, unit toggle state persists through `useTemperatureUnit`, current/hourly/daily displays receive `unit`, and Open-Meteo request shape remains unchanged. Search found no `console.*`, `debugger`, `TODO`, `TEMP`, or `FIXME` scaffolding in tracked TypeScript/Markdown feature files.
+  - Notes: Validation completed without application-code changes. Context component docs and display-preference patterns were refreshed to describe the selected-unit props and client-side conversion behavior. Browser-level manual smoke testing was not performed in this environment.
 
 ## Open questions
 
 - None blocking. Thresholds for risk badge categories are implementation details for T01 and should be documented in the helper/context once chosen.
+
+## Validation Report
+
+### Commands run
+
+- `npx tsc --noEmit` -> exit 0; TypeScript typecheck passed.
+- `npm run lint` -> exit 0; ESLint passed.
+- `npm run build` -> exit 0; Next.js 16 production build compiled, type-checked, generated static pages, and finalized successfully.
+- `npm test` -> exit 1; no `test` script exists in `package.json`, so no repository test suite is currently available to run.
+- `npx biome check .` -> exit 0; checked 1 configured file and reported no fixes.
+- `git status --short` -> tracked changes are limited to plan/context documentation for T06. Existing untracked `claude-tmp/` is present and was left untouched because it is not part of this plan task and contains an untracked `.env`.
+
+### Success-criteria verification
+
+- [x] Current weather can display concise risk badges for heavy rain, storms, fog, snow, strong wind, and extreme heat/cold -> confirmed in `lib/weather-risk-badges.ts` rule coverage and `CurrentWeatherCard` optional badge rendering.
+- [x] Risk badges use existing normalized forecast fields where possible -> confirmed use of `WeatherCondition.severity`, code/label/description, current precipitation, wind speed/gusts, and current/apparent temperature in `lib/weather-risk-badges.ts`.
+- [x] Risk badge logic is deterministic and UI-free -> confirmed `lib/weather-risk-badges.ts` has no React, storage, provider fetches, or side effects.
+- [x] Users can switch displayed temperatures between Celsius and Fahrenheit -> confirmed `app/page.tsx` toggle wiring through `useTemperatureUnit()` and `Button` near the selected-city heading.
+- [x] Temperature preference persists safely -> confirmed `hooks/useTemperatureUnit.ts` uses `localStorage` with `typeof window` guards, JSON parse/serialize, invalid-value fallback, and silent storage failure handling.
+- [x] Current, hourly, and daily temperature displays use the selected unit consistently -> confirmed `unit` props and `convertTemperature()` use in `CurrentWeatherCard`, `HourlyForecast`, and `DailyForecast`.
+- [x] Open-Meteo request shape remains unchanged -> confirmed no unit parameters or provider-side conversion changes in `lib/open-meteo.ts`; conversion remains display-only.
+- [x] Context reflects final behavior -> updated component docs, context map, display-preference pattern, and T06 evidence/status.
+
+### Failed checks and follow-ups
+
+- `npm test` cannot run until the project defines a `test` script; no automated test suite is currently configured.
+
+### Residual risks
+
+- Browser-level manual smoke testing was not performed in this environment; validation relied on static code inspection plus typecheck, lint, build, and configured Biome check.
+- Untracked `claude-tmp/` exists outside the T06 tracked context updates and was not modified or deleted.
