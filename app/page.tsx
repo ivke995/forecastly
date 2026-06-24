@@ -9,6 +9,7 @@ import WeatherRecommendations from "@/components/weather/WeatherRecommendations"
 import { getWeatherForecast, WeatherForecastError } from "@/lib/open-meteo";
 import { getWeatherRecommendations } from "@/lib/weather-recommendations";
 import { getCurrentWeatherRiskBadges } from "@/lib/weather-risk-badges";
+import { useTemperatureUnit } from "@/hooks/useTemperatureUnit";
 import type { CitySearchResult } from "@/types/city";
 import type { WeatherForecast } from "@/types/weather";
 
@@ -19,6 +20,7 @@ export default function Home() {
   const [forecast, setForecast] = useState<WeatherForecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { unit, toggleUnit } = useTemperatureUnit();
 
   const handleCitySelect = useCallback(async (city: CitySearchResult) => {
     setSelectedCity(city);

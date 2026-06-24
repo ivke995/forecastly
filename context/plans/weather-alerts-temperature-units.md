@@ -58,12 +58,16 @@ Client-side conversion is the preferred approach for this iteration because Fore
   - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed; `npm run build` passed.
   - Notes: Added optional `riskBadges` prop and compact accessible current-risk badge region inside `CurrentWeatherCard`; `app/page.tsx` derives badges from `forecast.current` via `getCurrentWeatherRiskBadges`. No hourly/daily badge rendering, notifications, or provider/API changes.
 
-- [ ] T03: `Add temperature unit preference state` (status:todo)
+- [x] T03: `Add temperature unit preference state` (status:done)
   - Task ID: T03
   - Goal: Add a Celsius/Fahrenheit preference contract and SSR-safe localStorage persistence for the selected unit.
   - Boundaries (in/out of scope): In - small type/helper or hook for `celsius`/`fahrenheit`, localStorage key handling, invalid stored-value fallback, app/page state integration. Out - provider-side unit params, non-temperature unit preferences such as wind speed or precipitation units.
   - Done when: The app defaults to Celsius, persists a Fahrenheit selection, restores it after reload, and handles missing/invalid localStorage values safely.
   - Verification notes (commands or checks): Run lint/typecheck; verify in browser/devtools that the localStorage key updates and reload restores the selected unit.
+  - Completed: 2026-06-24
+  - Files changed: `hooks/useTemperatureUnit.ts`, `app/page.tsx`
+  - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed (2 expected unused-variable warnings); `npm run build` passed.
+  - Notes: Added `hooks/useTemperatureUnit.ts` with SSR-safe localStorage persistence following the `useFavorites` pattern — lazy useState initializer, typeof window guard, try/catch for storage errors, invalid-value fallback to celsius. Exports `TemperatureUnit` type, `useTemperatureUnit()` hook returning `{ unit, setUnit, toggleUnit }`, and defaults to "celsius". Wired `unit` and `toggleUnit` into `app/page.tsx` for downstream use in T04/T05.
 
 - [ ] T04: `Apply selected unit to forecast temperature displays` (status:todo)
   - Task ID: T04
