@@ -6,6 +6,7 @@ import CurrentWeatherCard from "@/components/weather/CurrentWeatherCard";
 import DailyForecast from "@/components/weather/DailyForecast";
 import HourlyForecast from "@/components/weather/HourlyForecast";
 import WeatherRecommendations from "@/components/weather/WeatherRecommendations";
+import { Button } from "@/components/ui/button";
 import { getWeatherForecast, WeatherForecastError } from "@/lib/open-meteo";
 import { getWeatherRecommendations } from "@/lib/weather-recommendations";
 import { getCurrentWeatherRiskBadges } from "@/lib/weather-risk-badges";
@@ -78,9 +79,27 @@ export default function Home() {
         {/* Selected city info + weather forecast */}
         {!isLoading && forecast !== null && selectedCity !== null && (
           <div className="space-y-4">
-            <h2 className="text-2xl font-semibold tracking-tight">
-              {selectedCity.displayName}
-            </h2>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="text-2xl font-semibold tracking-tight">
+                {selectedCity.displayName}
+              </h2>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={toggleUnit}
+                aria-label={`Switch temperature display to ${
+                  unit === "celsius" ? "Fahrenheit" : "Celsius"
+                }`}
+                className="self-start"
+              >
+                <span aria-hidden="true">{unit === "celsius" ? "°C" : "°F"}</span>
+                <span className="text-foreground/60" aria-hidden="true">
+                  →
+                </span>
+                <span>{unit === "celsius" ? "°F" : "°C"}</span>
+              </Button>
+            </div>
             <CurrentWeatherCard
               cityName={forecast.city.name}
               country={forecast.city.country}

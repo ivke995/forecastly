@@ -24,6 +24,7 @@ export function convertTemperature(celsius: number, unit: TemperatureUnit): numb
 - **toggleUnit**: Switches between `"celsius"` and `"fahrenheit"` and persists the new value.
 - **Invalid values**: If `localStorage` contains a value that is neither `"celsius"` nor `"fahrenheit"`, the hook falls back to the default (`"celsius"`).
 - **Persistence**: Written back to `localStorage` after every mutation.
+- **Weather page integration**: `app/page.tsx` shows an accessible Celsius/Fahrenheit toggle beside the selected-city heading after a forecast loads. The toggle calls `toggleUnit`, preserves the loaded city/forecast state, and updates current, hourly, and daily temperature displays without refetching weather data.
 
 ### convertTemperature
 
@@ -38,7 +39,7 @@ convertTemperature(100, "fahrenheit") // => 212
 
 - Fahrenheit conversion uses `°F = °C * 9/5 + 32`.
 - Result is always rounded with `Math.round`, consistent with existing display patterns.
-- Used by `CurrentWeatherCard`, `HourlyForecast`, and `DailyForecast` to convert display values.
+- Used by `CurrentWeatherCard`, `HourlyForecast`, and `DailyForecast` to convert display values from the page-level selected unit.
 
 ## Key design decisions
 

@@ -80,12 +80,16 @@ Client-side conversion is the preferred approach for this iteration because Fore
   - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed (1 expected unused-variable warning for `toggleUnit`); `npm run build` passed.
   - Notes: Added `convertTemperature()` helper to `hooks/useTemperatureUnit.ts`, exported alongside `TemperatureUnit` type and `useTemperatureUnit` hook. Added `unit` prop to `CurrentWeatherCard`, `HourlyForecast`, and `DailyForecast`; each component converts Celsius to the selected unit and displays `°C`/`°F` suffix. Wired `unit` from `page.tsx` into all three forecast display components.
 
-- [ ] T05: `Add temperature unit toggle UI` (status:todo)
+- [x] T05: `Add temperature unit toggle UI` (status:done)
   - Task ID: T05
   - Goal: Provide an obvious, accessible control for switching Celsius/Fahrenheit in the forecast view.
   - Boundaries (in/out of scope): In - toggle placement near forecast/current weather controls, accessible labels, state update wiring, styling with existing UI primitives. Out - account-level preferences, server persistence, broader settings page.
   - Done when: Users can switch units from the weather page without losing the selected city/forecast state, and all temperature displays update immediately.
   - Verification notes (commands or checks): Run lint/typecheck; manually verify keyboard/mouse operation, persistence after reload, and no refetch requirement solely for unit switching.
+  - Completed: 2026-06-24
+  - Files changed: `app/page.tsx`
+  - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed; `npm run build` passed.
+  - Notes: Added an outline shadcn `Button` beside the selected-city heading in the forecast view. It calls the existing `toggleUnit` state updater, keeps the selected forecast in memory, and exposes an accessible label for switching to the alternate temperature unit. No provider request or persistence changes were made.
 
 - [ ] T06: `Validation and cleanup` (status:todo)
   - Task ID: T06

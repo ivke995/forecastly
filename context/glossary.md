@@ -35,3 +35,4 @@
 - **WeatherRecommendation**: The typed advice item interface from `lib/weather-recommendations.ts` with `id`, `icon`, `title`, and `description` fields.
 - **Weather risk badges helper**: The UI-free deterministic rule utility in `lib/weather-risk-badges.ts`; it exposes `getCurrentWeatherRiskBadges(current: CurrentWeather)` returning current-condition risk badge metadata derived from normalized weather fields for `CurrentWeatherCard` rendering — no rendering, API calls, or side effects.
 - **WeatherRiskBadge**: The typed badge metadata interface from `lib/weather-risk-badges.ts` with stable `id`, `icon`, `label`, `description`, and display `tone` fields.
+- **TemperatureUnit**: The Celsius/Fahrenheit display preference type from `hooks/useTemperatureUnit.ts`; normalized forecast data stays Celsius while UI components convert display values client-side.
