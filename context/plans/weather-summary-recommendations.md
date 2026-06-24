@@ -57,12 +57,15 @@ Wire the existing `CurrentWeatherCard` into `app/page.tsx` so selected-city resu
 	  - Files changed: `lib/weather-recommendations.ts`
 	  - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed; verified with representative inputs for rainy, sunny/hot, windy, thunderstorm/severe, humid, mild/missing-optional scenarios; all rules return expected recommendations.
 
-- [ ] T03: `Render weather recommendations on home page` (status:todo)
+- [x] T03: `Render weather recommendations on home page` (status:done)
   - Task ID: T03
   - Goal: Display recommendation items in the successful forecast state near the current weather summary.
   - Boundaries (in/out of scope): In — a small presentational section/card in `app/page.tsx` or a focused `components/weather/` component; call the helper from T02; style using existing Tailwind/shadcn patterns. Out — changing helper rules, altering forecast fetching, adding new shadcn primitives unless already available and necessary, broad page redesign.
   - Done when: Users see recommendation advice such as umbrella, sunscreen, windy commute, or good running weather when matching data is present; the section is readable on mobile and desktop; no recommendations are shown as broken/empty UI.
   - Verification notes (commands or checks): Run `npx tsc --noEmit`; run `npm run lint`; manually inspect successful forecast JSX ordering: current card, recommendations, hourly, daily.
+  - Completed: 2026-06-24
+  - Files changed: `app/page.tsx`, `components/weather/WeatherRecommendations.tsx`, `context/overview.md`, `context/architecture.md`, `context/glossary.md`, `context/context-map.md`, `context/services/weather-recommendations.md`, `context/components/weather-recommendations.md`
+  - Evidence: `npx tsc --noEmit` passed; `npm run lint` passed; `npm run build` passed; successful forecast JSX order is current card, recommendations, hourly forecast, daily forecast; `WeatherRecommendations` renders nothing for an empty recommendation list; context sync completed.
 
 - [ ] T04: `Validate, cleanup, and sync context` (status:todo)
   - Task ID: T04

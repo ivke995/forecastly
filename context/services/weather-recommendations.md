@@ -26,6 +26,6 @@
 
 - `lib/weather-recommendations.ts` returns typed recommendation data only; it does not render UI, call services, modify state, or perform side effects.
 - Rain codes reference the same WMO/Open-Meteo code set documented in [weather-codes.md](./weather-codes.md) for drizzle, rain, rain showers, and thunderstorm conditions.
-- UI rendering and presentation belong to caller code in `app/page.tsx` or future component code (see [T03 rendering task](../plans/weather-summary-recommendations.md)).
+- UI rendering and presentation belong to caller code in `app/page.tsx` and the display-only `WeatherRecommendations` component (see [weather-recommendations component](../components/weather-recommendations.md)).
 
-Related: [weather service](./weather.md), [weather domain models](../domain-models/weather.md), [weather-codes mapper](./weather-codes.md), [overview.md](../overview.md)
+Related: [weather service](./weather.md), [weather domain models](../domain-models/weather.md), [weather-codes mapper](./weather-codes.md), [weather-recommendations component](../components/weather-recommendations.md), [overview.md](../overview.md)

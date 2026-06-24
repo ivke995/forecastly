@@ -11,6 +11,7 @@
 - `context/components/current-weather-card.md` — reusable CurrentWeatherCard display-only Client Component with shadcn Card and typed weather props.
 - `context/components/daily-forecast.md` — reusable DailyForecast display-only Client Component with shadcn Card and responsive daily forecast grid/scroll layout.
 - `context/components/hourly-forecast.md` — reusable HourlyForecast display-only Client Component with shadcn Card and horizontally scrollable hourly forecast entries.
+- `context/components/weather-recommendations.md` — reusable WeatherRecommendations display-only Client Component for deterministic forecast advice items.
 - `context/components/shadcn-ui.md` — shadcn/ui component library configuration, available primitives, and usage patterns.
 - `context/services/weather.md` — current Open-Meteo forecast service contract, behavior, request shape, and boundaries.
 - `context/services/weather-codes.md` — canonical WMO/Open-Meteo weather-code mapper contract, supported codes, fallback behavior, and severity policy.

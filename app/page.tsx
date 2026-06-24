@@ -5,7 +5,9 @@ import CitySearch from "@/components/city/CitySearch";
 import CurrentWeatherCard from "@/components/weather/CurrentWeatherCard";
 import DailyForecast from "@/components/weather/DailyForecast";
 import HourlyForecast from "@/components/weather/HourlyForecast";
+import WeatherRecommendations from "@/components/weather/WeatherRecommendations";
 import { getWeatherForecast, WeatherForecastError } from "@/lib/open-meteo";
+import { getWeatherRecommendations } from "@/lib/weather-recommendations";
 import type { CitySearchResult } from "@/types/city";
 import type { WeatherForecast } from "@/types/weather";
 
@@ -88,6 +90,9 @@ export default function Home() {
               windSpeed={forecast.current.windSpeed ?? 0}
               weatherIcon={forecast.current.condition.emoji}
               weatherDescription={forecast.current.condition.description}
+            />
+            <WeatherRecommendations
+              recommendations={getWeatherRecommendations(forecast)}
             />
             <HourlyForecast hourly={forecast.hourly.slice(0, 24)} />
             <DailyForecast daily={forecast.daily} />
