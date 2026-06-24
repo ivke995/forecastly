@@ -19,6 +19,7 @@
 - **CurrentWeatherCard**: The reusable display-only Client Component in `components/weather/CurrentWeatherCard.tsx`; it renders a shadcn Card with current weather conditions (city, temperature, feels like, humidity, wind, weather icon/description) received via typed props — no API calls or side effects.
 - **HourlyForecast component**: The reusable display-only Client Component in `components/weather/HourlyForecast.tsx`; it renders a shadcn Card with a horizontally scrollable row of hourly forecast entries (time, weather emoji, temperature, precipitation probability) received via typed props — no API calls or side effects.
 - **DailyForecast component**: The reusable display-only Client Component in `components/weather/DailyForecast.tsx`; it renders a shadcn Card with a responsive daily forecast layout (horizontal scroll on mobile, 7-column grid on desktop) showing day, weather emoji, min/max temperature, and precipitation probability — no API calls or side effects.
+- **WeatherRecommendations component**: The reusable display-only Client Component in `components/weather/WeatherRecommendations.tsx`; it renders weather advice items in a shadcn Card and returns `null` when no recommendations are available — no API calls or side effects.
 - **Geocoding service**: The UI-free external-data service in `lib/geocoding.ts`; it exposes `searchCities(query: string)` and normalizes Open-Meteo geocoding data into `CitySearchResult` objects.
 - **Open-Meteo Geocoding API**: The external provider endpoint used by `lib/geocoding.ts` for city search data.
 - **GeocodingError**: The exported typed error from `lib/geocoding.ts` thrown for geocoding provider, network, parse, or malformed-payload failures.
@@ -30,3 +31,5 @@
 - **Base-nova**: The shadcn/ui style preset selected during init. Uses CSS variables for theming with the `base-nova` component patterns.
 - **components.json**: The root-level shadcn/ui configuration file defining style, aliases, Tailwind settings, and icon library.
 - **cn()**: The utility function in `lib/utils.ts` that merges Tailwind class names using `clsx` and `tailwind-merge`. Used throughout shadcn components and available for feature components.
+- **Weather recommendations helper**: The UI-free deterministic rule utility in `lib/weather-recommendations.ts`; it exposes `getWeatherRecommendations(forecast: WeatherForecast)` returning a stable-ordered list of advice items (umbrella, sunscreen, windy, humidity, severe alert, good running weather) derived from existing normalized forecast fields — no API calls or side effects.
+- **WeatherRecommendation**: The typed advice item interface from `lib/weather-recommendations.ts` with `id`, `icon`, `title`, and `description` fields.

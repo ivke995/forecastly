@@ -6,7 +6,7 @@ A reusable display-only Client Component that renders a shadcn Card with current
 
 | Prop | Type | Description |
 |---|---|---|
-| `cityName` | `string` | City display name (`City.displayName`) |
+| `cityName` | `string` | City name text |
 | `country` | `string` | Country name (`City.country`) |
 | `temperature` | `number` | Current temperature (°C) |
 | `feelsLike` | `number` | Apparent/feels-like temperature (°C) |
@@ -15,7 +15,7 @@ A reusable display-only Client Component that renders a shadcn Card with current
 | `weatherIcon` | `string` | Emoji string from `WeatherCondition.emoji` |
 | `weatherDescription` | `string` | Human-readable condition description (`WeatherCondition.description`) |
 
-Usage note: values correspond to fields on `CurrentWeather` (`temperature`, `apparentTemperature`, `relativeHumidity`, `windSpeed`) and `WeatherCondition` (`emoji`, `description`), but the component receives them as flat props for maximum reusability.
+Usage note: values correspond to fields on `CurrentWeather` (`temperature`, `apparentTemperature`, `relativeHumidity`, `windSpeed`) and `WeatherCondition` (`emoji`, `description`), but the component receives them as flat props for maximum reusability. `app/page.tsx` renders this card above hourly/daily forecasts after a successful city search, using `forecast.current.temperature` as the fallback for missing apparent temperature and `0` for missing humidity or wind speed.
 
 ## Layout
 
