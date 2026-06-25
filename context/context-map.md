@@ -10,6 +10,7 @@
 - `context/components/city-search.md` — reusable CitySearch autocomplete Client Component that wraps the geocoding service.
 - `context/components/favorite-cities.md` — reusable FavoriteCities display Client Component with shadcn Card, favorite list, click-to-select, and remove actions.
 - `context/components/current-weather-card.md` — reusable CurrentWeatherCard display-only Client Component with selected-unit temperature display and optional current-risk badges.
+- `context/components/forecast-trend-chart.md` — reusable ForecastTrendChart display-only Client Component for dependency-free SVG temperature/precipitation trend visualizations.
 - `context/components/daily-forecast.md` — reusable DailyForecast display-only Client Component with selected-unit temperature display and responsive daily forecast grid/scroll layout.
 - `context/components/hourly-forecast.md` — reusable HourlyForecast display-only Client Component with selected-unit temperature display and horizontally scrollable hourly forecast entries.
 - `context/components/weather-recommendations.md` — reusable WeatherRecommendations display-only Client Component for deterministic forecast advice items.
