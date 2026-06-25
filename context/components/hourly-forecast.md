@@ -7,13 +7,14 @@ A reusable display-only Client Component that renders a shadcn Card with horizon
 | Prop | Type | Description |
 |---|---|---|
 | `hourly` | `HourlyForecast[]` | Array of hourly forecast rows (typically `forecast.hourly.slice(0, 24)`) |
+| `unit` | `TemperatureUnit` | Selected display unit; hourly Celsius values are converted for display |
 
 Each item in `hourly` conforms to the `HourlyForecast` type from `@/types/weather`:
 | Field | Source | Display |
 |---|---|---|
 | `time` | ISO string | Formatted hour via `Intl.DateTimeFormat` ("2 PM") |
 | `condition.emoji` | Weather emoji | `text-2xl` emoji with `aria-label` from `condition.description` |
-| `temperature` | Numeric (°C) | `Math.round()` with `°` suffix |
+| `temperature` | Numeric (°C) | Converted via `convertTemperature()` and labeled as `°C` or `°F` |
 | `precipitationProbability` | Numeric (%) | Shown as `N%`; only rendered when defined |
 
 ## Layout
@@ -34,6 +35,7 @@ A pure presentational component — all visual states (loading, error, empty) ar
 
 - `@/components/ui/card` (Card, CardHeader, CardTitle, CardContent)
 - `@/types/weather` (HourlyForecast type)
+- `@/hooks/useTemperatureUnit` (`TemperatureUnit` type and `convertTemperature()` display helper)
 - `"use client"` directive for Next.js client-side interactivity
 
-Related: [weather types](../domain-models/weather.md), [current-weather-card](./current-weather-card.md), [shadcn/ui primitives](./shadcn-ui.md), [patterns.md](../patterns.md)
+Related: [weather types](../domain-models/weather.md), [current-weather-card](./current-weather-card.md), [temperature unit hook](../hooks/use-temperature-unit.md), [shadcn/ui primitives](./shadcn-ui.md), [patterns.md](../patterns.md)

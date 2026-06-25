@@ -9,15 +9,17 @@
 - `context/services/geocoding.md` — current Open-Meteo city-search service contract, behavior, and boundaries.
 - `context/components/city-search.md` — reusable CitySearch autocomplete Client Component that wraps the geocoding service.
 - `context/components/favorite-cities.md` — reusable FavoriteCities display Client Component with shadcn Card, favorite list, click-to-select, and remove actions.
-- `context/components/current-weather-card.md` — reusable CurrentWeatherCard display-only Client Component with shadcn Card and typed weather props.
-- `context/components/daily-forecast.md` — reusable DailyForecast display-only Client Component with shadcn Card and responsive daily forecast grid/scroll layout.
-- `context/components/hourly-forecast.md` — reusable HourlyForecast display-only Client Component with shadcn Card and horizontally scrollable hourly forecast entries.
+- `context/components/current-weather-card.md` — reusable CurrentWeatherCard display-only Client Component with selected-unit temperature display and optional current-risk badges.
+- `context/components/daily-forecast.md` — reusable DailyForecast display-only Client Component with selected-unit temperature display and responsive daily forecast grid/scroll layout.
+- `context/components/hourly-forecast.md` — reusable HourlyForecast display-only Client Component with selected-unit temperature display and horizontally scrollable hourly forecast entries.
 - `context/components/weather-recommendations.md` — reusable WeatherRecommendations display-only Client Component for deterministic forecast advice items.
 - `context/components/shadcn-ui.md` — shadcn/ui component library configuration, available primitives, and usage patterns.
 - `context/services/weather.md` — current Open-Meteo forecast service contract, behavior, request shape, and boundaries.
 - `context/services/weather-codes.md` — canonical WMO/Open-Meteo weather-code mapper contract, supported codes, fallback behavior, and severity policy.
 - `context/hooks/use-favorites.md` — SSR-safe `useFavorites()` hook for localStorage-backed favorite cities persistence.
+- `context/hooks/use-temperature-unit.md` — SSR-safe `useTemperatureUnit()` hook for localStorage-backed Celsius/Fahrenheit preference persistence.
 - `context/services/weather-recommendations.md` — deterministic weather-recommendation helper contract, rule thresholds, and boundaries.
+- `context/services/weather-risk-badges.md` — deterministic current-weather risk badge helper contract, thresholds, output metadata, and boundaries.
 - `context/plans/` — active implementation plans with task checklists.
 - `context/decisions/` — durable architecture/product decisions.
 - `context/handovers/` — handover notes for transferring work between sessions.

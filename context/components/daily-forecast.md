@@ -7,14 +7,15 @@ A reusable display-only Client Component that renders a shadcn Card with a respo
 | Prop | Type | Description |
 |---|---|---|
 | `daily` | `DailyForecast[]` | Array of daily forecast rows (typically `forecast.daily` for 7 days) |
+| `unit` | `TemperatureUnit` | Selected display unit; daily Celsius values are converted for display |
 
 Each item in `daily` conforms to the `DailyForecast` type from `@/types/weather`:
 | Field | Source | Display |
 |---|---|---|
 | `date` | String date | Day of week (e.g. "Mon") + full date (e.g. "Jan 15") |
 | `condition.emoji` | Weather emoji | `text-2xl` emoji with `aria-label` from `condition.description` |
-| `temperatureMax` | Numeric (°C) | `Math.round()` with `°` suffix (bold, primary) |
-| `temperatureMin` | Numeric (°C) | `Math.round()` with `°` suffix (muted, secondary) |
+| `temperatureMax` | Numeric (°C) | Converted via `convertTemperature()` and labeled as `°C` or `°F` (bold, primary) |
+| `temperatureMin` | Numeric (°C) | Converted via `convertTemperature()` and labeled as `°C` or `°F` (muted, secondary) |
 | `precipitationProbabilityMax` | Numeric (%) | Shown as `N%`; only rendered when defined |
 
 ## Layout
@@ -38,6 +39,7 @@ A pure presentational component — all visual states (loading, error, empty) ar
 
 - `@/components/ui/card` (Card, CardHeader, CardTitle, CardContent)
 - `@/types/weather` (DailyForecast type)
+- `@/hooks/useTemperatureUnit` (`TemperatureUnit` type and `convertTemperature()` display helper)
 - `"use client"` directive for Next.js client-side interactivity
 
-Related: [weather types](../domain-models/weather.md), [hourly-forecast](./hourly-forecast.md), [shadcn/ui primitives](./shadcn-ui.md), [patterns.md](../patterns.md)
+Related: [weather types](../domain-models/weather.md), [hourly-forecast](./hourly-forecast.md), [temperature unit hook](../hooks/use-temperature-unit.md), [shadcn/ui primitives](./shadcn-ui.md), [patterns.md](../patterns.md)

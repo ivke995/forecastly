@@ -6,8 +6,11 @@ import CurrentWeatherCard from "@/components/weather/CurrentWeatherCard";
 import DailyForecast from "@/components/weather/DailyForecast";
 import HourlyForecast from "@/components/weather/HourlyForecast";
 import WeatherRecommendations from "@/components/weather/WeatherRecommendations";
+import { Button } from "@/components/ui/button";
 import { getWeatherForecast, WeatherForecastError } from "@/lib/open-meteo";
 import { getWeatherRecommendations } from "@/lib/weather-recommendations";
+import { getCurrentWeatherRiskBadges } from "@/lib/weather-risk-badges";
+import { useTemperatureUnit } from "@/hooks/useTemperatureUnit";
 import type { CitySearchResult } from "@/types/city";
 import type { WeatherForecast } from "@/types/weather";
 
@@ -18,6 +21,7 @@ export default function Home() {
   const [forecast, setForecast] = useState<WeatherForecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { unit, toggleUnit } = useTemperatureUnit();
 
   const handleCitySelect = useCallback(async (city: CitySearchResult) => {
     setSelectedCity(city);
@@ -75,9 +79,27 @@ export default function Home() {
         {/* Selected city info + weather forecast */}
         {!isLoading && forecast !== null && selectedCity !== null && (
           <div className="space-y-4">
-            <h2 className="text-2xl font-semibold tracking-tight">
-              {selectedCity.displayName}
-            </h2>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="text-2xl font-semibold tracking-tight">
+                {selectedCity.displayName}
+              </h2>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={toggleUnit}
+                aria-label={`Switch temperature display to ${
+                  unit === "celsius" ? "Fahrenheit" : "Celsius"
+                }`}
+                className="self-start"
+              >
+                <span aria-hidden="true">{unit === "celsius" ? "°C" : "°F"}</span>
+                <span className="text-foreground/60" aria-hidden="true">
+                  →
+                </span>
+                <span>{unit === "celsius" ? "°F" : "°C"}</span>
+              </Button>
+            </div>
             <CurrentWeatherCard
               cityName={forecast.city.name}
               country={forecast.city.country}
@@ -90,12 +112,14 @@ export default function Home() {
               windSpeed={forecast.current.windSpeed ?? 0}
               weatherIcon={forecast.current.condition.emoji}
               weatherDescription={forecast.current.condition.description}
+              unit={unit}
+              riskBadges={getCurrentWeatherRiskBadges(forecast.current)}
             />
             <WeatherRecommendations
               recommendations={getWeatherRecommendations(forecast)}
             />
-            <HourlyForecast hourly={forecast.hourly.slice(0, 24)} />
-            <DailyForecast daily={forecast.daily} />
+            <HourlyForecast hourly={forecast.hourly.slice(0, 24)} unit={unit} />
+            <DailyForecast daily={forecast.daily} unit={unit} />
           </div>
         )}
       </div>
