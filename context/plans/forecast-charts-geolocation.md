@@ -70,12 +70,16 @@ Add two scanability/convenience features to the Forecastly home experience:
   - Evidence: `npx eslint lib/coordinate-location.ts` passed; `npx tsc --noEmit` passed; `npm run build` passed.
   - Notes: Added UI-free coordinate helpers for validation, coordinate fallback display, stable coordinate-backed city objects, best-effort Open-Meteo reverse geocoding, and typed fallback behavior that preserves forecast compatibility when readable lookup fails.
 
-- [ ] T04: `Add Use My Location flow to home page` (status:todo)
+- [x] T04: `Add Use My Location flow to home page` (status:done)
   - Task ID: T04
   - Goal: Add a browser geolocation button to `app/page.tsx` that fetches forecast data for the user's current coordinates.
   - Boundaries (in/out of scope): In - button placement near `CitySearch`, browser geolocation support/permission/loading/error states, reuse existing forecast loading/rendering path, readable/fallback display name from T03. Out - persistence, favorites integration, server routes, chart rendering changes beyond coexistence with existing forecast display.
   - Done when: Clicking "Use my location" requests geolocation, fetches forecast by coordinates on approval, displays a readable or coordinate fallback location name, handles denied/unsupported/timeout/weather errors, and does not regress city search selection.
   - Verification notes (commands or checks): Run targeted TypeScript/lint checks; manually test approved geolocation, denied permission, unsupported geolocation simulation if practical, and a normal city search after using the button.
+  - Completed: 2026-06-26
+  - Files changed: `app/page.tsx`
+  - Evidence: `npx eslint app/page.tsx` passed; `npx tsc --noEmit` passed; `npm run build` passed.
+  - Notes: Added a `Use my location` action beside city search, browser geolocation request/timeout handling, readable coordinate-location resolution with coordinate fallback notice, forecast fetch reuse, and user-readable unsupported/denied/unavailable/timeout/weather error messages. Manual browser permission-path testing remains for final validation.
 
 - [ ] T05: `Sync feature context documentation` (status:todo)
   - Task ID: T05

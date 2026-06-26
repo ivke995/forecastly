@@ -4,6 +4,7 @@
 - `context/architecture.md` — current architecture notes and diagrams.
 - `context/patterns.md` — established reusable implementation patterns.
 - `context/glossary.md` — project terms and definitions.
+- `context/app/home-page.md` — Forecastly home route responsibilities, city-search orchestration, and browser geolocation flow.
 - `context/domain-models/city.md` — city-domain type model contracts and boundaries.
 - `context/domain-models/weather.md` — weather forecast type model contracts and boundaries.
 - `context/services/geocoding.md` — current Open-Meteo city-search service contract, behavior, and boundaries.

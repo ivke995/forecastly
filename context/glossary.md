@@ -26,6 +26,7 @@
 - **GeocodingError**: The exported typed error from `lib/geocoding.ts` thrown for geocoding provider, network, parse, or malformed-payload failures.
 - **Coordinate location helper**: The UI-free helper/service in `lib/coordinate-location.ts`; it validates browser latitude/longitude, builds `CitySearchResult`-compatible coordinate locations, attempts readable reverse display metadata, and falls back to deterministic coordinate display.
 - **CoordinateLocationError**: The exported typed error from `lib/coordinate-location.ts` thrown for invalid coordinates and captured on fallback results when readable reverse lookup fails.
+- **Use my location**: The home-page browser geolocation action in `app/page.tsx`; it requests coordinates, resolves readable/fallback location display through `lib/coordinate-location.ts`, and fetches weather through the existing forecast service path.
 - **Weather forecast service**: The UI-free external-data service in `lib/open-meteo.ts`; it exposes `getWeatherForecast(city: City)` and normalizes seven-day Open-Meteo forecast data into `WeatherForecast` objects.
 - **Open-Meteo Forecast API**: The external provider endpoint used by `lib/open-meteo.ts` for current, hourly, and daily weather forecast data.
 - **WMO/Open-Meteo weather code**: The numeric weather-condition code returned by Open-Meteo forecast payloads and normalized by `lib/weather-codes.ts`.
