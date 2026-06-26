@@ -93,12 +93,16 @@ The redesign should focus on product presentation and usability: richer weather-
   - Evidence: Local `node_modules/next/dist/docs/` page/client docs were not present when checked before editing; `npm run lint` passed.
   - Notes: Reworked the home page JSX into a weather-dashboard composition with a hero/search panel, stronger onboarding cards, readable loading/error/location notice states, selected-forecast header with unit toggle, and responsive forecast sections. Existing state, handlers, service calls, recommendation/risk derivation, and temperature-unit flow remain unchanged. Favorite toggle/list wiring remains deferred to T05.
 
-- [ ] T05: `Complete favorites integration on home page` (status:todo)
+- [x] T05: `Complete favorites integration on home page` (status:done)
   - Task ID: T05
   - Goal: Wire the existing `useFavorites()` hook and `FavoriteCities` component into the redesigned home page.
   - Boundaries (in/out of scope): In scope — `app/page.tsx` imports and UI wiring for favorite state, star/unstar button next to selected city/location title, and mounted `FavoriteCities` section/panel that calls `handleCitySelect`. Out of scope — modifying `hooks/useFavorites.ts`, modifying `components/city/FavoriteCities.tsx` API, changing persistence key, adding confirmation dialogs, favorite reordering/editing.
   - Done when: Selected city view shows a star toggle; favorited state reflects `isFavorite(selectedCity.id)`; clicking the toggle adds/removes the selected city using existing hook methods; `FavoriteCities` appears in the redesigned layout; clicking a favorite loads weather via the same city-selection path; no favorite controls appear when no city/location is selected except the favorites list/empty state if intentionally shown by layout.
   - Verification notes (commands or checks): Inspect `app/page.tsx` imports and event handlers; manually reason through add/remove/select event paths; run `npm run lint`; run `npx tsc --noEmit` if available/appropriate.
+  - Completed: 2026-06-26
+  - Files changed: `app/page.tsx`
+  - Evidence: Local Next.js 16 docs under `node_modules/next/dist/docs/01-app/02-guides/static-exports.md` were consulted for safe browser API usage in Client Components; `npm run lint` passed; `npx tsc --noEmit` passed.
+  - Notes: Home page now wires the existing `useFavorites()` hook into the selected forecast dashboard, renders an accessible star toggle whose filled/default state follows `isFavorite(selectedCity.id)`, adds/removes the selected city through existing hook methods, and mounts `FavoriteCities` in the dashboard sidebar with selection routed through `handleCitySelect`. No favorite hook, persistence key, or `FavoriteCities` API changes were made.
 
 - [ ] T06: `Upgrade current weather hero card` (status:todo)
   - Task ID: T06
