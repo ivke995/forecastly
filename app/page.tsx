@@ -99,102 +99,160 @@ export default function Home() {
   }, []);
 
   return (
-    <section className="flex min-h-[50vh] flex-col justify-center py-12 text-center sm:text-left">
-      <div className="max-w-2xl space-y-4">
-        {/* City search and geolocation */}
-        <div className="space-y-3">
-          <CitySearch onSelect={handleCitySelect} />
-          <Button
-            type="button"
-            variant="outline"
-            onClick={handleUseMyLocation}
-            disabled={isLoading}
-            aria-label="Use my current location for the weather forecast"
-          >
-            {isLocating ? "Locating…" : "Use my location"}
-          </Button>
-        </div>
+    <section className="space-y-8 py-8 sm:py-10">
+      <div className="overflow-hidden rounded-[2rem] border bg-card/80 shadow-sm backdrop-blur">
+        <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)] lg:items-center lg:p-10">
+          <div className="space-y-5">
+            <div className="inline-flex w-fit items-center rounded-full border bg-background/70 px-3 py-1 text-xs font-medium text-muted-foreground shadow-sm">
+              Live weather dashboard
+            </div>
+            <div className="space-y-3">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                Plan your day with clear, local forecasts.
+              </h1>
+              <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+                Search for any city or use your current location to see current
+                conditions, hourly trends, seven-day outlooks, and practical
+                weather recommendations.
+              </p>
+            </div>
+          </div>
 
+          <div className="rounded-3xl border bg-background/75 p-4 shadow-sm sm:p-5">
+            <div className="space-y-3">
+              <div className="space-y-1">
+                <h2 className="text-lg font-semibold tracking-tight">
+                  Find your forecast
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                  Start with a city search or let Forecastly use your browser
+                  location.
+                </p>
+              </div>
+              <CitySearch onSelect={handleCitySelect} />
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleUseMyLocation}
+                disabled={isLoading}
+                aria-label="Use my current location for the weather forecast"
+                className="w-full justify-center"
+              >
+                {isLocating ? "Locating…" : "Use my location"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-4" aria-live="polite">
         {locationNotice !== null && !isLoading && forecast !== null && (
-          <div className="rounded-lg border border-amber-500/20 bg-amber-500/10 px-4 py-3 text-sm text-amber-700 dark:text-amber-300">
+          <div className="rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-sm text-amber-800 shadow-sm dark:text-amber-200">
             {locationNotice}
           </div>
         )}
 
-        {/* Hero placeholder — visible when no city has been selected yet */}
-        {selectedCity === null && !isLoading && error === null && (
-          <>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Forecastly
-            </h1>
-            <div className="text-foreground/70 space-y-2 text-lg leading-8 sm:text-xl">
-              <p>Smart weather forecasts and recommendations.</p>
-              <p>Search for a city to get started.</p>
-            </div>
-          </>
-        )}
-
-        {/* Loading state */}
         {isLoading && (
-          <div className="flex justify-center py-8">
-            <div className="size-8 animate-spin rounded-full border-4 border-foreground/10 border-t-foreground/40" />
+          <div className="rounded-3xl border bg-card/80 p-8 text-center shadow-sm">
+            <div className="mx-auto size-10 animate-spin rounded-full border-4 border-primary/15 border-t-primary" />
+            <p className="mt-4 text-sm font-medium text-muted-foreground">
+              {isLocating
+                ? "Finding your location and forecast…"
+                : "Loading the latest forecast…"}
+            </p>
           </div>
         )}
 
-        {/* Error state */}
         {!isLoading && error !== null && (
-          <div className="rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-500">
+          <div className="rounded-2xl border border-destructive/25 bg-destructive/10 px-4 py-3 text-sm text-destructive shadow-sm">
             {error}
           </div>
         )}
+      </div>
 
-        {/* Selected city info + weather forecast */}
-        {!isLoading && forecast !== null && selectedCity !== null && (
-          <div className="space-y-4">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <h2 className="text-2xl font-semibold tracking-tight">
+      {selectedCity === null && !isLoading && error === null && (
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-3xl border bg-card/70 p-5 shadow-sm">
+            <p className="text-sm font-semibold">Current conditions</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              See temperature, feels-like conditions, wind, humidity, and risk
+              badges at a glance.
+            </p>
+          </div>
+          <div className="rounded-3xl border bg-card/70 p-5 shadow-sm">
+            <p className="text-sm font-semibold">Hourly trends</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Review the next 24 hours with temperature and precipitation
+              charts.
+            </p>
+          </div>
+          <div className="rounded-3xl border bg-card/70 p-5 shadow-sm">
+            <p className="text-sm font-semibold">7-day outlook</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Compare daily highs, lows, precipitation chances, and forecast
+              advice.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {!isLoading && forecast !== null && selectedCity !== null && (
+        <div className="space-y-6">
+          <div className="flex flex-col gap-4 rounded-3xl border bg-card/80 p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-6">
+            <div className="space-y-1">
+              <p className="text-sm font-medium text-muted-foreground">
+                Forecast for
+              </p>
+              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
                 {selectedCity.displayName}
               </h2>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={toggleUnit}
-                aria-label={`Switch temperature display to ${
-                  unit === "celsius" ? "Fahrenheit" : "Celsius"
-                }`}
-                className="self-start"
-              >
-                <span aria-hidden="true">{unit === "celsius" ? "°C" : "°F"}</span>
-                <span className="text-foreground/60" aria-hidden="true">
-                  →
-                </span>
-                <span>{unit === "celsius" ? "°F" : "°C"}</span>
-              </Button>
             </div>
-            <CurrentWeatherCard
-              cityName={forecast.city.name}
-              country={forecast.city.country}
-              temperature={forecast.current.temperature}
-              feelsLike={
-                forecast.current.apparentTemperature ??
-                forecast.current.temperature
-              }
-              humidity={forecast.current.relativeHumidity ?? 0}
-              windSpeed={forecast.current.windSpeed ?? 0}
-              weatherIcon={forecast.current.condition.emoji}
-              weatherDescription={forecast.current.condition.description}
-              unit={unit}
-              riskBadges={getCurrentWeatherRiskBadges(forecast.current)}
-            />
-            <WeatherRecommendations
-              recommendations={getWeatherRecommendations(forecast)}
-            />
-            <HourlyForecast hourly={forecast.hourly.slice(0, 24)} unit={unit} />
-            <DailyForecast daily={forecast.daily} unit={unit} />
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={toggleUnit}
+              aria-label={`Switch temperature display to ${
+                unit === "celsius" ? "Fahrenheit" : "Celsius"
+              }`}
+              className="w-fit"
+            >
+              <span aria-hidden="true">{unit === "celsius" ? "°C" : "°F"}</span>
+              <span className="text-muted-foreground" aria-hidden="true">
+                →
+              </span>
+              <span>{unit === "celsius" ? "°F" : "°C"}</span>
+            </Button>
           </div>
-        )}
-      </div>
+
+          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(320px,0.45fr)]">
+            <div className="space-y-6">
+              <CurrentWeatherCard
+                cityName={forecast.city.name}
+                country={forecast.city.country}
+                temperature={forecast.current.temperature}
+                feelsLike={
+                  forecast.current.apparentTemperature ??
+                  forecast.current.temperature
+                }
+                humidity={forecast.current.relativeHumidity ?? 0}
+                windSpeed={forecast.current.windSpeed ?? 0}
+                weatherIcon={forecast.current.condition.emoji}
+                weatherDescription={forecast.current.condition.description}
+                unit={unit}
+                riskBadges={getCurrentWeatherRiskBadges(forecast.current)}
+              />
+              <HourlyForecast hourly={forecast.hourly.slice(0, 24)} unit={unit} />
+            </div>
+            <div className="space-y-6">
+              <WeatherRecommendations
+                recommendations={getWeatherRecommendations(forecast)}
+              />
+              <DailyForecast daily={forecast.daily} unit={unit} />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

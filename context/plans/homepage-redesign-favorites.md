@@ -82,12 +82,16 @@ The redesign should focus on product presentation and usability: richer weather-
   - Evidence: Local `node_modules/next/dist/docs/` layout/metadata docs were not present when checked before editing; generated `components/ui/sidebar.tsx` and `components/ui/tooltip.tsx` were inspected for composition API; `npm run lint` passed; `npx tsc --noEmit` passed.
   - Notes: Root layout now wraps routes with `TooltipProvider`, `SidebarProvider`, the official shadcn sidebar primitives, a Forecastly brand link, active Dashboard/Search navigation, section shortcuts for Current/Hourly/7-Day/Favorites, a disabled Settings item, accessible sidebar trigger, and centered responsive main content under the root `app/` route tree. Generated shadcn primitives were not edited.
 
-- [ ] T04: `Recompose home page dashboard layout` (status:todo)
+- [x] T04: `Recompose home page dashboard layout` (status:done)
   - Task ID: T04
   - Goal: Refactor `app/page.tsx` presentation into a responsive weather-dashboard composition while preserving existing state and fetch behavior.
   - Boundaries (in/out of scope): In scope — `app/page.tsx` layout/classes/copy only; reorganize search, geolocation button, onboarding, loading, error, notice, selected-city header, and existing forecast components into a richer responsive layout. Out of scope — favorite toggle wiring, component internals, service changes, hook changes, new dependencies.
   - Done when: Empty state has a strong hero/search experience; selected forecast state uses responsive dashboard sections instead of a narrow single column; all existing calls to `getWeatherForecast`, `resolveCoordinateLocation`, `getWeatherRecommendations`, `getCurrentWeatherRiskBadges`, and `useTemperatureUnit` still work through the same data flow; loading/error/location-notice states remain visible and readable.
   - Verification notes (commands or checks): Before editing, consult/attempt to consult relevant Next.js 16 page/client-component docs; inspect `app/page.tsx` for unchanged data flow; run `npm run lint` after implementation.
+  - Completed: 2026-06-26
+  - Files changed: `app/page.tsx`
+  - Evidence: Local `node_modules/next/dist/docs/` page/client docs were not present when checked before editing; `npm run lint` passed.
+  - Notes: Reworked the home page JSX into a weather-dashboard composition with a hero/search panel, stronger onboarding cards, readable loading/error/location notice states, selected-forecast header with unit toggle, and responsive forecast sections. Existing state, handlers, service calls, recommendation/risk derivation, and temperature-unit flow remain unchanged. Favorite toggle/list wiring remains deferred to T05.
 
 - [ ] T05: `Complete favorites integration on home page` (status:todo)
   - Task ID: T05

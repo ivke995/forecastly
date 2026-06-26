@@ -5,10 +5,20 @@
 ## Responsibilities
 
 - Own route-level weather selection state: selected city/location, forecast data, loading, error, and non-blocking location notices.
+- Render a weather-dashboard presentation with a hero/search panel, onboarding forecast-preview cards, selected-forecast header, and responsive forecast sections.
 - Render `CitySearch` and call `getWeatherForecast(city)` when a searched city is selected.
 - Render a `Use my location` action beside city search.
 - Own browser geolocation orchestration for the location action.
 - Pass normalized forecast data and selected temperature unit into display-only weather components.
+
+## Rendering states
+
+- Initial state shows a strong dashboard hero, prominent `CitySearch`, full-width `Use my location` action, and three onboarding cards describing current conditions, hourly trends, and the 7-day outlook.
+- Loading state is a centered dashboard card with an accessible live-region container and copy that distinguishes location lookup from normal forecast loading.
+- Error state remains a readable page-level destructive alert below the hero/search area.
+- Coordinate fallback notice remains a readable non-blocking amber alert when forecast data is available.
+- Selected forecast state shows the selected city/location display name in a dashboard header with an accessible Celsius/Fahrenheit toggle, then lays out current weather plus hourly forecast and recommendations plus daily forecast in responsive dashboard columns.
+- Favorite controls are intentionally not wired in this page yet; that is tracked by the homepage redesign favorites plan's T05.
 
 ## Use my location flow
 
