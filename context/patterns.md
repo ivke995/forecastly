@@ -50,5 +50,7 @@
 
 - Add new shadcn primitives via the CLI (`npx shadcn@latest add <component>`) rather than manually copying files.
 - Keep shadcn-generated files under `components/ui/` unmodified — do not edit them directly. Wrap or compose them in feature-specific components under `components/<domain>/` if customization is needed.
+- The generated `hooks/use-mobile.ts` support hook is treated like shadcn support code; keep its public `useIsMobile()` contract stable for `Sidebar` responsive behavior.
+- When composing `Tooltip` or `Sidebar` tooltip affordances in the app shell, wrap the composed tree in `TooltipProvider` from `@/components/ui/tooltip`.
 - Import shadcn components using the `@/components/ui/` alias.
 - Use `cn()` from `@/lib/utils` for className merging in feature components; it is already available and consistent with shadcn conventions.
