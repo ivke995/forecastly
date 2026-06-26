@@ -81,12 +81,16 @@ Add two scanability/convenience features to the Forecastly home experience:
   - Evidence: `npx eslint app/page.tsx` passed; `npx tsc --noEmit` passed; `npm run build` passed.
   - Notes: Added a `Use my location` action beside city search, browser geolocation request/timeout handling, readable coordinate-location resolution with coordinate fallback notice, forecast fetch reuse, and user-readable unsupported/denied/unavailable/timeout/weather error messages. Manual browser permission-path testing remains for final validation.
 
-- [ ] T05: `Sync feature context documentation` (status:todo)
+- [x] T05: `Sync feature context documentation` (status:done)
   - Task ID: T05
   - Goal: Update durable context files to describe the current-state chart components and geolocation/coordinate-location behavior after implementation.
   - Boundaries (in/out of scope): In - update relevant `context/components/`, `context/services/`, `context/domain-models/`, `context/overview.md`, `context/architecture.md`, `context/glossary.md`, and `context/context-map.md` as needed. Out - application code changes and historical implementation narrative.
   - Done when: Context describes the implemented current state accurately, new files are discoverable from `context/context-map.md`, and stale statements are repaired.
   - Verification notes (commands or checks): Review changed context files against code truth; ensure no completed-work summary is placed in core context files.
+  - Completed: 2026-06-26
+  - Files changed: `context/plans/forecast-charts-geolocation.md`
+  - Evidence: Reviewed current chart and geolocation source files against durable context files; `context/overview.md`, `context/architecture.md`, `context/glossary.md`, `context/context-map.md`, `context/app/home-page.md`, `context/components/forecast-trend-chart.md`, `context/components/hourly-forecast.md`, `context/components/daily-forecast.md`, and `context/services/coordinate-location.md` already matched code truth. `git diff --check` passed.
+  - Notes: No durable context drift found for the implemented chart and coordinate-location behavior; only T05 plan status/evidence needed updating.
 
 - [ ] T06: `Final validation and cleanup` (status:todo)
   - Task ID: T06
