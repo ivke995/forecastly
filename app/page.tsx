@@ -2,11 +2,13 @@
 
 import { useCallback, useState } from "react";
 import CitySearch from "@/components/city/CitySearch";
+import FavoriteCities from "@/components/city/FavoriteCities";
 import CurrentWeatherCard from "@/components/weather/CurrentWeatherCard";
 import DailyForecast from "@/components/weather/DailyForecast";
 import HourlyForecast from "@/components/weather/HourlyForecast";
 import WeatherRecommendations from "@/components/weather/WeatherRecommendations";
 import { Button } from "@/components/ui/button";
+import { Star } from "lucide-react";
 import {
   CoordinateLocationError,
   resolveCoordinateLocation,
@@ -14,6 +16,7 @@ import {
 import { getWeatherForecast, WeatherForecastError } from "@/lib/open-meteo";
 import { getWeatherRecommendations } from "@/lib/weather-recommendations";
 import { getCurrentWeatherRiskBadges } from "@/lib/weather-risk-badges";
+import { useFavorites } from "@/hooks/useFavorites";
 import { useTemperatureUnit } from "@/hooks/useTemperatureUnit";
 import type { CitySearchResult } from "@/types/city";
 import type { WeatherForecast } from "@/types/weather";
@@ -30,6 +33,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [locationNotice, setLocationNotice] = useState<string | null>(null);
   const { unit, toggleUnit } = useTemperatureUnit();
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
   const handleCitySelect = useCallback(async (city: CitySearchResult) => {
     setSelectedCity(city);
@@ -97,6 +101,23 @@ export default function Home() {
       setIsLocating(false);
     }
   }, []);
+
+  const selectedCityIsFavorite = selectedCity
+    ? isFavorite(selectedCity.id)
+    : false;
+
+  const handleFavoriteToggle = useCallback(() => {
+    if (selectedCity === null) {
+      return;
+    }
+
+    if (isFavorite(selectedCity.id)) {
+      removeFavorite(selectedCity.id);
+      return;
+    }
+
+    addFavorite(selectedCity);
+  }, [addFavorite, isFavorite, removeFavorite, selectedCity]);
 
   return (
     <section className="space-y-8 py-8 sm:py-10">
@@ -203,9 +224,31 @@ export default function Home() {
               <p className="text-sm font-medium text-muted-foreground">
                 Forecast for
               </p>
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                {selectedCity.displayName}
-              </h2>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                  {selectedCity.displayName}
+                </h2>
+                <Button
+                  type="button"
+                  variant={selectedCityIsFavorite ? "default" : "outline"}
+                  size="sm"
+                  onClick={handleFavoriteToggle}
+                  aria-pressed={selectedCityIsFavorite}
+                  aria-label={
+                    selectedCityIsFavorite
+                      ? `Remove ${selectedCity.displayName} from favorites`
+                      : `Add ${selectedCity.displayName} to favorites`
+                  }
+                  className="w-fit"
+                >
+                  <Star
+                    className="size-4"
+                    fill={selectedCityIsFavorite ? "currentColor" : "none"}
+                    aria-hidden="true"
+                  />
+                  {selectedCityIsFavorite ? "Favorited" : "Favorite"}
+                </Button>
+              </div>
             </div>
             <Button
               type="button"
@@ -248,6 +291,7 @@ export default function Home() {
               <WeatherRecommendations
                 recommendations={getWeatherRecommendations(forecast)}
               />
+              <FavoriteCities onSelect={handleCitySelect} />
               <DailyForecast daily={forecast.daily} unit={unit} />
             </div>
           </div>
