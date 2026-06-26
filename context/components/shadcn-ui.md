@@ -21,6 +21,16 @@
 |-----------|------|---------|
 | Card | `components/ui/card.tsx` | `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`, `CardAction` |
 | Button | `components/ui/button.tsx` | `Button` (with `size` and `variant` props) |
+| Input | `components/ui/input.tsx` | `Input` |
+| Separator | `components/ui/separator.tsx` | `Separator` |
+| Sheet | `components/ui/sheet.tsx` | `Sheet`, `SheetTrigger`, `SheetClose`, `SheetPortal`, `SheetOverlay`, `SheetContent`, `SheetHeader`, `SheetFooter`, `SheetTitle`, `SheetDescription` |
+| Skeleton | `components/ui/skeleton.tsx` | `Skeleton` |
+| Tooltip | `components/ui/tooltip.tsx` | `Tooltip`, `TooltipTrigger`, `TooltipContent`, `TooltipProvider` |
+| Sidebar | `components/ui/sidebar.tsx` | `SidebarProvider`, `Sidebar`, `SidebarTrigger`, `SidebarInset`, `SidebarHeader`, `SidebarContent`, `SidebarFooter`, `SidebarGroup`, `SidebarGroupLabel`, `SidebarGroupContent`, `SidebarMenu`, `SidebarMenuItem`, `SidebarMenuButton`, and related sidebar subcomponents |
+
+## Generated Support Hooks
+
+- `hooks/use-mobile.ts` exports `useIsMobile()`, used by the shadcn sidebar for responsive desktop/mobile behavior. It keeps an SSR-safe initial state and listens to the `(max-width: 767px)` media query on the client.
 
 ## Adding New Components
 
@@ -55,5 +65,6 @@ export function MyFeatureCard() {
 - `tailwind-merge` — className conflict resolution
 - `tw-animate-css` — Tailwind CSS animation utilities
 - `lucide-react` — Icon library (available via shadcn init)
+- `@base-ui/react` — Base primitives used by the current shadcn v4/base-nova generated components
 
 See also: [overview.md](../overview.md), [patterns.md](../patterns.md)

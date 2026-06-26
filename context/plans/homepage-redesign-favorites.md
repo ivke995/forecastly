@@ -60,12 +60,16 @@ The redesign should focus on product presentation and usability: richer weather-
   - Evidence: `npm run lint` passed. Local `node_modules/next/dist/docs/` docs were not present when checked before editing.
   - Notes: Replaced neutral starter shadcn tokens with light/dark weather-themed OKLCH palettes for backgrounds, foregrounds, cards, popovers, primary/secondary/accent, borders, inputs, rings, charts, and sidebar variables while preserving `@theme inline`, imports, radius, and base layer structure.
 
-- [ ] T02: `Add official shadcn sidebar primitives` (status:todo)
+- [x] T02: `Add official shadcn sidebar primitives` (status:done)
   - Task ID: T02
   - Goal: Install the official shadcn `sidebar` component and any generated support primitives required by the registry.
   - Boundaries (in/out of scope): In scope — run the shadcn CLI/registry add command for `sidebar`; accept generated `components/ui/` files and required package/config updates produced by that command; inspect generated code for fit with project aliases. Out of scope — composing the app layout, manual edits to generated primitives, unrelated shadcn components, unrelated dependency upgrades.
   - Done when: Official sidebar primitives exist under `components/ui/`; generated imports resolve with existing aliases; any package/config changes are limited to shadcn sidebar requirements; no application layout behavior has been changed yet.
   - Verification notes (commands or checks): Use `npx shadcn@latest add sidebar` or the correct shadcn v4 equivalent; inspect generated files; run `npm run lint`; run `npx tsc --noEmit` if generated types need verification.
+  - Completed: 2026-06-26
+  - Files changed: `components/ui/input.tsx`, `components/ui/separator.tsx`, `components/ui/sheet.tsx`, `components/ui/sidebar.tsx`, `components/ui/skeleton.tsx`, `components/ui/tooltip.tsx`, `hooks/use-mobile.ts`
+  - Evidence: `npx shadcn@latest add sidebar` completed and generated the official sidebar primitives/support components; `npm run lint` passed; `npx tsc --noEmit` passed. Local `node_modules/next/dist/docs/` docs were not present when checked before implementation.
+  - Notes: shadcn reported `components/ui/button.tsx` as skipped/identical and reminded that app composition should wrap sidebar tooltip usage with `TooltipProvider`; this is deferred to T03 layout composition. The generated `hooks/use-mobile.ts` was minimally adjusted with approval so initial mobile state is computed in the state initializer instead of a synchronous effect state update, satisfying the repo lint rule without changing the public hook contract.
 
 - [ ] T03: `Compose sidebar-based root app shell` (status:todo)
   - Task ID: T03
