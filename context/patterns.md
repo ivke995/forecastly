@@ -5,6 +5,8 @@
 - Keep global page chrome in `app/layout.tsx` so App Router pages render inside a consistent shell.
 - Use text-only Forecastly branding until dedicated brand assets are introduced.
 - Constrain primary page content with a centered `max-w-[1200px]` container and responsive horizontal/vertical padding.
+- Compose sidebar navigation with the official shadcn sidebar primitives in `app/layout.tsx`; keep generated primitives unchanged and put app-specific brand/nav items in the layout composition.
+- Wrap sidebar tooltip affordances with `TooltipProvider`, use `SidebarTrigger` for mobile/desktop sidebar toggling, and mark future/nonimplemented destinations as disabled/non-navigating.
 - Keep root layout concerns separate from page content; home-page copy and feature UI belong in `app/page.tsx` or future route/page components.
 - Keep `app/page.tsx` focused on route-specific content; avoid duplicating layout wrappers, metadata, shared headers, or global theme concerns there.
 
