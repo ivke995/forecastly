@@ -13,7 +13,7 @@
   - Utils: `@/lib/utils`
   - Hooks: `@/hooks`
 - **Icon library:** Lucide
-- **CSS variables:** Enabled (`@theme inline` in `app/globals.css`)
+- **CSS variables:** Enabled (`@theme inline` in `app/globals.css`) with Forecastly weather-themed light/dark OKLCH tokens for core surfaces, charts, and sidebar variables.
 
 ## Available Components
 

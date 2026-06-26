@@ -1,5 +1,7 @@
 # Favorite Cities
 
+> Remaining home-page integration work from this plan is superseded by `context/plans/homepage-redesign-favorites.md`, which combines favorites integration with the selected homepage redesign scope. Keep this file as historical task context for the already-created hook/component until final validation reconciles active plan state.
+
 ## Change summary
 
 Add a "favorite cities" feature that lets users star/unstar cities and revisit them quickly. Persistence is in `localStorage` — no backend or database.
