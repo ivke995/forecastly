@@ -44,39 +44,64 @@ export default function CurrentWeatherCard({
   riskBadges = [],
 }: CurrentWeatherCardProps) {
   const hasRiskBadges = riskBadges.length > 0;
+  const temperatureLabel = `${convertTemperature(temperature, unit)}${
+    unit === "celsius" ? "°C" : "°F"
+  }`;
+  const feelsLikeLabel = `${convertTemperature(feelsLike, unit)}${
+    unit === "celsius" ? "°C" : "°F"
+  }`;
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
+    <Card className="overflow-hidden border-primary/15 bg-card/95 shadow-lg shadow-primary/5">
+      <CardHeader className="border-b border-border/60 bg-gradient-to-br from-primary/10 via-accent/10 to-transparent pb-5">
+        <CardDescription className="font-medium uppercase tracking-[0.2em] text-primary">
+          Current Weather
+        </CardDescription>
+        <CardTitle className="text-2xl tracking-tight sm:text-3xl">
           {cityName}, {country}
         </CardTitle>
-        <CardDescription>Current Weather</CardDescription>
       </CardHeader>
-      <CardContent>
-        {/* Main temperature and weather icon section */}
-        <div className="mb-6 flex items-center gap-4">
-          <span
-            className="text-5xl"
-            role="img"
-            aria-label={weatherDescription}
-          >
-            {weatherIcon}
-          </span>
-          <span className="text-4xl font-bold">
-            {convertTemperature(temperature, unit)}
-            {unit === "celsius" ? "°C" : "°F"}
-          </span>
-        </div>
+      <CardContent className="space-y-6 p-5 sm:p-6">
+        <section
+          className="grid gap-5 rounded-3xl border border-border/60 bg-gradient-to-br from-background via-muted/30 to-accent/10 p-5 sm:grid-cols-[1fr_auto] sm:items-center"
+          aria-label="Current conditions summary"
+        >
+          <div className="space-y-3">
+            <div className="flex items-end gap-3">
+              <span className="text-6xl font-semibold tracking-tighter sm:text-7xl">
+                {temperatureLabel}
+              </span>
+            </div>
+            <div>
+              <p className="text-lg font-semibold capitalize text-foreground">
+                {weatherDescription}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Feels like {feelsLikeLabel} with {humidity}% humidity and winds at {windSpeed} km/h.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex justify-start sm:justify-end">
+            <span
+              className="flex size-28 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-6xl shadow-inner shadow-primary/10 sm:size-32 sm:text-7xl"
+              role="img"
+              aria-label={weatherDescription}
+            >
+              {weatherIcon}
+            </span>
+          </div>
+        </section>
 
         {hasRiskBadges && (
           <section
-            className="mb-6 rounded-lg border border-border bg-muted/20 p-3 text-left"
+            className="rounded-2xl border border-border/70 bg-muted/20 p-4 text-left"
             aria-label="Current weather risks"
           >
-            <h3 className="mb-2 text-sm font-medium text-muted-foreground">
-              Current risks
-            </h3>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <h3 className="text-sm font-semibold text-foreground">Current risks</h3>
+              <span className="text-xs text-muted-foreground">Live condition alerts</span>
+            </div>
             <ul className="flex flex-wrap gap-2">
               {riskBadges.map((badge) => (
                 <li key={badge.id}>
@@ -94,26 +119,24 @@ export default function CurrentWeatherCard({
           </section>
         )}
 
-        {/* Detail fields – single column on mobile, two columns on wider screens */}
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-          <div className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2">
-            <span className="text-sm text-muted-foreground">Feels like</span>
-            <span className="text-sm font-medium">
-              {convertTemperature(feelsLike, unit)}
-              {unit === "celsius" ? "°C" : "°F"}
+          <div className="rounded-2xl border border-border/60 bg-muted/30 p-4">
+            <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Feels like</span>
+            <span className="mt-2 block text-2xl font-semibold">
+              {feelsLikeLabel}
             </span>
           </div>
-          <div className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2">
-            <span className="text-sm text-muted-foreground">Humidity</span>
-            <span className="text-sm font-medium">{humidity}%</span>
+          <div className="rounded-2xl border border-border/60 bg-muted/30 p-4">
+            <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Humidity</span>
+            <span className="mt-2 block text-2xl font-semibold">{humidity}%</span>
           </div>
-          <div className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2">
-            <span className="text-sm text-muted-foreground">Wind</span>
-            <span className="text-sm font-medium">{windSpeed} km/h</span>
+          <div className="rounded-2xl border border-border/60 bg-muted/30 p-4">
+            <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Wind</span>
+            <span className="mt-2 block text-2xl font-semibold">{windSpeed} km/h</span>
           </div>
-          <div className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2 md:col-span-2">
-            <span className="text-sm text-muted-foreground">Description</span>
-            <span className="text-sm font-medium capitalize">
+          <div className="rounded-2xl border border-border/60 bg-muted/30 p-4 md:col-span-2">
+            <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Condition summary</span>
+            <span className="mt-2 block text-base font-medium capitalize">
               {weatherDescription}
             </span>
           </div>
