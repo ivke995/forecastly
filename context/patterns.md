@@ -13,6 +13,7 @@
 - Define app background, foreground, and font tokens in `app/globals.css` through Tailwind v4 `@theme inline` mappings.
 - Preserve Geist font variables from `next/font/google`; use `font-sans`/`font-mono` utilities instead of hard-coded component fonts.
 - Keep dark-mode-capable defaults in CSS variables so future UI can rely on `bg-background` and `text-foreground`.
+- Keep the Forecastly palette weather-oriented and shadcn-compatible: light mode uses airy sky/tint surfaces with blue/cyan accents, dark mode uses deep storm/navy surfaces with readable cool foregrounds, and chart/sidebar tokens stay defined alongside core surface tokens for upcoming dashboard/sidebar composition.
 
 ## Domain Model Types
 
