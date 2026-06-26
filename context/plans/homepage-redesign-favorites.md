@@ -71,12 +71,16 @@ The redesign should focus on product presentation and usability: richer weather-
   - Evidence: `npx shadcn@latest add sidebar` completed and generated the official sidebar primitives/support components; `npm run lint` passed; `npx tsc --noEmit` passed. Local `node_modules/next/dist/docs/` docs were not present when checked before implementation.
   - Notes: shadcn reported `components/ui/button.tsx` as skipped/identical and reminded that app composition should wrap sidebar tooltip usage with `TooltipProvider`; this is deferred to T03 layout composition. The generated `hooks/use-mobile.ts` was minimally adjusted with approval so initial mobile state is computed in the state initializer instead of a synchronous effect state update, satisfying the repo lint rule without changing the public hook contract.
 
-- [ ] T03: `Compose sidebar-based root app shell` (status:todo)
+- [x] T03: `Compose sidebar-based root app shell` (status:done)
   - Task ID: T03
   - Goal: Replace the current top-header-only shell with a responsive Forecastly navigation sidebar using the official shadcn sidebar primitives.
   - Boundaries (in/out of scope): In scope — `app/layout.tsx` composition around `SidebarProvider`, `Sidebar`, sidebar trigger/header/content/footer patterns, accessible text-based brand, responsive main content wrapper, initial nav items/section shortcuts. Out of scope — adding real new pages/routes, changing weather page state, changing metadata behavior beyond existing Forecastly metadata, editing generated shadcn primitives.
   - Done when: The app has a shadcn sidebar with Forecastly branding; Dashboard/Search is the active primary item; Current, Hourly, 7-Day, and Favorites are represented as section-oriented shortcuts where practical; future items, if included, are clearly disabled/non-navigating; mobile users have an accessible sidebar trigger; `main` still provides a centered responsive content region; route tree stays under root `app/`.
   - Verification notes (commands or checks): Before editing, consult/attempt to consult relevant Next.js 16 layout/metadata docs and shadcn sidebar docs/registry output; inspect rendered JSX structure; run `npm run lint` after implementation.
+  - Completed: 2026-06-26
+  - Files changed: `app/layout.tsx`
+  - Evidence: Local `node_modules/next/dist/docs/` layout/metadata docs were not present when checked before editing; generated `components/ui/sidebar.tsx` and `components/ui/tooltip.tsx` were inspected for composition API; `npm run lint` passed; `npx tsc --noEmit` passed.
+  - Notes: Root layout now wraps routes with `TooltipProvider`, `SidebarProvider`, the official shadcn sidebar primitives, a Forecastly brand link, active Dashboard/Search navigation, section shortcuts for Current/Hourly/7-Day/Favorites, a disabled Settings item, accessible sidebar trigger, and centered responsive main content under the root `app/` route tree. Generated shadcn primitives were not edited.
 
 - [ ] T04: `Recompose home page dashboard layout` (status:todo)
   - Task ID: T04
