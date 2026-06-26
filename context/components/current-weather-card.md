@@ -21,13 +21,13 @@ Usage note: values correspond to fields on `CurrentWeather` (`temperature`, `app
 
 ## Layout
 
-- **CardHeader**: City name + country in the `CardTitle`, "Current Weather" subtitle in `CardDescription`.
-- **CardContent**: Large weather emoji (`text-5xl`) and converted/labeled temperature (`text-4xl font-bold`) in a prominent flex row.
-- **Current risks**: Only rendered when `riskBadges.length > 0`; uses a labelled section with compact wrapped badge pills, tone-based border/background/text colors, decorative icons, and per-badge accessible labels from badge descriptions.
-- **Detail grid**: Feels like, humidity, wind, and description in a responsive grid:
+- **CardHeader**: Weather-themed gradient header with uppercase "Current Weather" label and city name + country in the `CardTitle`.
+- **Current conditions summary**: Labelled hero section with the converted/labeled temperature as the dominant visual element, a capitalized condition summary, a sentence combining feels-like/humidity/wind, and a rounded weather-emoji treatment with `role="img"` and condition `aria-label`.
+- **Current risks**: Only rendered when `riskBadges.length > 0`; uses a labelled section with compact wrapped badge pills, tone-based border/background/text colors, decorative icons, per-badge accessible labels from badge descriptions, and a small "Live condition alerts" descriptor.
+- **Detail grid**: Feels like, humidity, wind, and condition summary in metric-style tiles:
   - **Mobile** (`grid-cols-1`): single-column stack.
   - **Wider screens** (`md:grid-cols-2`): two-column grid; description spans full width (`md:col-span-2`).
-- Each detail field is wrapped in a subtle `bg-muted/50` rounded box for visual separation.
+- Each detail field is wrapped in a rounded bordered muted tile; feels-like and main temperature both use `convertTemperature()` with the selected `unit`.
 
 ## States
 

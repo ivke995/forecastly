@@ -104,12 +104,16 @@ The redesign should focus on product presentation and usability: richer weather-
   - Evidence: Local Next.js 16 docs under `node_modules/next/dist/docs/01-app/02-guides/static-exports.md` were consulted for safe browser API usage in Client Components; `npm run lint` passed; `npx tsc --noEmit` passed.
   - Notes: Home page now wires the existing `useFavorites()` hook into the selected forecast dashboard, renders an accessible star toggle whose filled/default state follows `isFavorite(selectedCity.id)`, adds/removes the selected city through existing hook methods, and mounts `FavoriteCities` in the dashboard sidebar with selection routed through `handleCitySelect`. No favorite hook, persistence key, or `FavoriteCities` API changes were made.
 
-- [ ] T06: `Upgrade current weather hero card` (status:todo)
+- [x] T06: `Upgrade current weather hero card` (status:done)
   - Task ID: T06
   - Goal: Make `CurrentWeatherCard` the visual centerpiece of the selected forecast dashboard.
   - Boundaries (in/out of scope): In scope — `components/weather/CurrentWeatherCard.tsx` presentation/classes/semantic grouping; improved temperature hierarchy, icon treatment, condition summary, metric tiles, and risk-badge presentation using existing props. Out of scope — changing prop contract unless strictly necessary, fetching data, changing risk-badge derivation, changing temperature conversion logic.
   - Done when: Current conditions are scannable at a glance; risk badges remain accessible; humidity/wind/feels-like/description are visually grouped; selected unit display remains correct through `convertTemperature`; component remains display-only.
   - Verification notes (commands or checks): Inspect component prop usage; run `npm run lint`; run `npx tsc --noEmit` if available/appropriate.
+  - Completed: 2026-06-26
+  - Files changed: `components/weather/CurrentWeatherCard.tsx`
+  - Evidence: Local `node_modules/next/dist/docs/` docs were not present when checked before editing; `npm run lint` passed; `npx tsc --noEmit` passed.
+  - Notes: Reworked `CurrentWeatherCard` into a stronger display-only hero card with a prominent temperature/condition summary, rounded weather icon treatment, grouped metric tiles, and accessible risk-badge section. Existing props, `convertTemperature` display behavior, and risk-badge metadata usage were preserved.
 
 - [ ] T07: `Polish forecast sections and charts` (status:todo)
   - Task ID: T07
