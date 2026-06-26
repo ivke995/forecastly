@@ -7,6 +7,7 @@
 - `context/domain-models/city.md` — city-domain type model contracts and boundaries.
 - `context/domain-models/weather.md` — weather forecast type model contracts and boundaries.
 - `context/services/geocoding.md` — current Open-Meteo city-search service contract, behavior, and boundaries.
+- `context/services/coordinate-location.md` — UI-free coordinate-location helper contract for browser geolocation coordinates, reverse display lookup, and deterministic coordinate fallback.
 - `context/components/city-search.md` — reusable CitySearch autocomplete Client Component that wraps the geocoding service.
 - `context/components/favorite-cities.md` — reusable FavoriteCities display Client Component with shadcn Card, favorite list, click-to-select, and remove actions.
 - `context/components/current-weather-card.md` — reusable CurrentWeatherCard display-only Client Component with selected-unit temperature display and optional current-risk badges.

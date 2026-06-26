@@ -35,6 +35,7 @@
 - Keep reusable provider-code/domain mappers in focused UI-free `lib/` helpers instead of duplicating lookup tables inside service modules.
 - Use `lib/weather-codes.ts` as the canonical WMO/Open-Meteo weather-code mapper; weather services should call `getWeatherCondition(code)` rather than maintaining local weather-code tables.
 - Keep forecast-derived display metadata helpers UI-free and deterministic in `lib/`; they should return typed data for components to render later and avoid React imports, storage access, provider calls, or provider request changes.
+- For browser coordinate forecast flows, convert coordinates into `CitySearchResult`-compatible data before calling `getWeatherForecast`; readable reverse display lookup must be best-effort and must preserve deterministic coordinate fallback when provider lookup fails.
 
 ## Client-side Weather Display Preferences
 

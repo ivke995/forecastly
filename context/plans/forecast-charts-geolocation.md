@@ -59,12 +59,16 @@ Add two scanability/convenience features to the Forecastly home experience:
   - Evidence: `npm run lint` passed; `npx tsc --noEmit` passed; `npm run build` passed.
   - Notes: Added `ForecastTrendChart` to hourly and daily cards with local data mapping from displayed rows, selected-unit temperature labels, daily high/low series, and precipitation series that omit missing probability values.
 
-- [ ] T03: `Add coordinate location helpers` (status:todo)
+- [x] T03: `Add coordinate location helpers` (status:done)
   - Task ID: T03
   - Goal: Add UI-free helpers to convert browser coordinates into a Forecastly city-like object and attempt readable reverse/nearby display metadata with coordinate fallback.
   - Boundaries (in/out of scope): In - reusable helper/service code under `lib/` and/or `types/` for coordinate normalization, coordinate display formatting, best-effort reverse/nearby lookup using existing/no-new-dependency provider approach, typed error/fallback behavior. Out - React UI, browser permission prompts, weather chart code, persistence.
   - Done when: Given latitude/longitude/timezone, helper code can produce a valid `CitySearchResult`/`City` compatible object for `getWeatherForecast`; readable display lookup failures fall back to deterministic coordinate display without preventing weather fetch.
   - Verification notes (commands or checks): Run targeted TypeScript/lint checks; if tests exist or are added, verify success/failure paths for valid coordinates, invalid coordinates, readable lookup success, and readable lookup failure fallback.
+  - Completed: 2026-06-26
+  - Files changed: `lib/coordinate-location.ts`
+  - Evidence: `npx eslint lib/coordinate-location.ts` passed; `npx tsc --noEmit` passed; `npm run build` passed.
+  - Notes: Added UI-free coordinate helpers for validation, coordinate fallback display, stable coordinate-backed city objects, best-effort Open-Meteo reverse geocoding, and typed fallback behavior that preserves forecast compatibility when readable lookup fails.
 
 - [ ] T04: `Add Use My Location flow to home page` (status:todo)
   - Task ID: T04
