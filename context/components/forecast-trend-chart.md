@@ -32,7 +32,7 @@ Temperature values are converted with `convertTemperature(celsius, unit)` so cha
 
 ## Boundaries
 
-- Integration into `HourlyForecast` and `DailyForecast` is separate; callers own selecting and shaping forecast rows.
+- `HourlyForecast` and `DailyForecast` integrate this component and own selecting/shaping forecast rows into series props.
 - Browser geolocation and provider request changes are outside this component.
 - The component is display-only and should remain free of API calls, storage access, and new dependencies.
 

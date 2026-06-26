@@ -48,12 +48,16 @@ Add two scanability/convenience features to the Forecastly home experience:
   - Evidence: `npm run lint` passed; `npx tsc --noEmit` passed; `npm run build` passed. Initial checks required `npm ci` because `node_modules` was absent; no package dependency files were changed.
   - Notes: Added a display-only SVG trend chart with typed temperature/precipitation series props, existing `convertTemperature()` unit conversion, accessible chart text, empty-data fallback, flat-series padding, and single-point markers.
 
-- [ ] T02: `Integrate hourly and daily trend charts` (status:todo)
+- [x] T02: `Integrate hourly and daily trend charts` (status:done)
   - Task ID: T02
   - Goal: Add the trend visualizations to both `HourlyForecast` and `DailyForecast` displays.
   - Boundaries (in/out of scope): In - render hourly temperature/precipitation trends using the first displayed hourly rows, render daily min/max temperature and precipitation trends using displayed daily rows, preserve existing cards and list/grid content. Out - geolocation, weather service request changes, visual redesign beyond chart placement.
   - Done when: Hourly and daily forecast cards each show trend visuals alongside existing forecast details; chart labels update when the selected unit changes; missing precipitation values are handled gracefully; existing horizontal/mobile layouts remain usable.
   - Verification notes (commands or checks): Run targeted TypeScript/lint checks; manually test a searched city in Celsius and Fahrenheit at mobile and desktop widths.
+  - Completed: 2026-06-26
+  - Files changed: `components/weather/HourlyForecast.tsx`, `components/weather/DailyForecast.tsx`
+  - Evidence: `npm run lint` passed; `npx tsc --noEmit` passed; `npm run build` passed.
+  - Notes: Added `ForecastTrendChart` to hourly and daily cards with local data mapping from displayed rows, selected-unit temperature labels, daily high/low series, and precipitation series that omit missing probability values.
 
 - [ ] T03: `Add coordinate location helpers` (status:todo)
   - Task ID: T03
