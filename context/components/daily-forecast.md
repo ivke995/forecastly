@@ -1,6 +1,6 @@
 # DailyForecast Component
 
-A reusable display-only Client Component that renders a shadcn Card with a responsive daily weather forecast layout. Defined in `components/weather/DailyForecast.tsx`. All data arrives via props — no API calls or side effects.
+A reusable display-only Client Component that renders a shadcn Card with daily high/low temperature and precipitation trend charts plus a responsive daily weather forecast layout. Defined in `components/weather/DailyForecast.tsx`. All data arrives via props — no API calls or side effects.
 
 ## Props
 
@@ -21,7 +21,9 @@ Each item in `daily` conforms to the `DailyForecast` type from `@/types/weather`
 ## Layout
 
 - **CardHeader**: `CardTitle` "7-Day Forecast".
-- **CardContent**: A responsive container:
+- **CardContent**: A `ForecastTrendChart` followed by a responsive forecast container:
+- **Trend chart**: Maps displayed daily rows into high-temperature, low-temperature, and defined-precipitation series. Missing `precipitationProbabilityMax` values are omitted from the precipitation series. Temperature labels use the selected `unit` through `ForecastTrendChart`.
+- **Forecast container**:
   - **Mobile (< 768px)**: `flex overflow-x-auto` horizontal scroll with individual day cards at `min-w-[100px]`
   - **Desktop (≥ 768px)**: `md:grid md:grid-cols-7` grid layout showing all 7 days without scrolling
 - **Each day entry**: A bordered card (`rounded-lg border bg-muted/30 p-3`) containing:
@@ -38,6 +40,7 @@ A pure presentational component — all visual states (loading, error, empty) ar
 ## Dependencies
 
 - `@/components/ui/card` (Card, CardHeader, CardTitle, CardContent)
+- `@/components/weather/ForecastTrendChart` (dependency-free SVG trend visualization)
 - `@/types/weather` (DailyForecast type)
 - `@/hooks/useTemperatureUnit` (`TemperatureUnit` type and `convertTemperature()` display helper)
 - `"use client"` directive for Next.js client-side interactivity

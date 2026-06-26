@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ForecastTrendChart from "@/components/weather/ForecastTrendChart";
 import type { DailyForecast as DailyForecastType } from "@/types/weather";
 import type { TemperatureUnit } from "@/hooks/useTemperatureUnit";
 import { convertTemperature } from "@/hooks/useTemperatureUnit";
@@ -39,12 +40,59 @@ function formatFullDate(dateStr: string): string {
 }
 
 export default function DailyForecast({ daily, unit }: DailyForecastProps) {
+  const highTemperatureTrend = daily.map((day) => ({
+    label: formatDay(day.date),
+    valueCelsius: day.temperatureMax,
+  }));
+  const lowTemperatureTrend = daily.map((day) => ({
+    label: formatDay(day.date),
+    valueCelsius: day.temperatureMin,
+  }));
+  const precipitationTrend = daily.flatMap((day) =>
+    day.precipitationProbabilityMax === undefined
+      ? []
+      : [
+          {
+            label: formatDay(day.date),
+            valuePercent: day.precipitationProbabilityMax,
+          },
+        ],
+  );
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>7-Day Forecast</CardTitle>
       </CardHeader>
       <CardContent>
+        <ForecastTrendChart
+          title="Daily trends"
+          description="High and low temperatures plus precipitation probability across the displayed days."
+          unit={unit}
+          temperatureSeries={[
+            {
+              id: "daily-high-temperature",
+              label: "High temperature",
+              points: highTemperatureTrend,
+              tone: "primary",
+            },
+            {
+              id: "daily-low-temperature",
+              label: "Low temperature",
+              points: lowTemperatureTrend,
+              tone: "muted",
+            },
+          ]}
+          precipitationSeries={[
+            {
+              id: "daily-precipitation",
+              label: "Precipitation",
+              points: precipitationTrend,
+              tone: "secondary",
+            },
+          ]}
+          className="mb-4"
+        />
         {/* Mobile: horizontal scroll — Desktop: grid */}
         <div
           className="flex gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-7 md:overflow-visible"

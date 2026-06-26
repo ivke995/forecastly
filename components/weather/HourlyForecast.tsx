@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ForecastTrendChart from "@/components/weather/ForecastTrendChart";
 import type { HourlyForecast as HourlyForecastType } from "@/types/weather";
 import type { TemperatureUnit } from "@/hooks/useTemperatureUnit";
 import { convertTemperature } from "@/hooks/useTemperatureUnit";
@@ -29,12 +30,49 @@ function formatHour(isoTime: string): string {
 }
 
 export default function HourlyForecast({ hourly, unit }: HourlyForecastProps) {
+  const temperatureTrend = hourly.map((hour) => ({
+    label: formatHour(hour.time),
+    valueCelsius: hour.temperature,
+  }));
+  const precipitationTrend = hourly.flatMap((hour) =>
+    hour.precipitationProbability === undefined
+      ? []
+      : [
+          {
+            label: formatHour(hour.time),
+            valuePercent: hour.precipitationProbability,
+          },
+        ],
+  );
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>Hourly Forecast</CardTitle>
       </CardHeader>
       <CardContent>
+        <ForecastTrendChart
+          title="Hourly trends"
+          description="Temperature and precipitation probability across the displayed hours."
+          unit={unit}
+          temperatureSeries={[
+            {
+              id: "hourly-temperature",
+              label: "Temperature",
+              points: temperatureTrend,
+              tone: "primary",
+            },
+          ]}
+          precipitationSeries={[
+            {
+              id: "hourly-precipitation",
+              label: "Precipitation",
+              points: precipitationTrend,
+              tone: "secondary",
+            },
+          ]}
+          className="mb-4"
+        />
         <div
           className="flex gap-4 overflow-x-auto pb-2"
           role="list"

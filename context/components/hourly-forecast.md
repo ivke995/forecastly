@@ -1,6 +1,6 @@
 # HourlyForecast Component
 
-A reusable display-only Client Component that renders a shadcn Card with horizontally scrollable hourly weather entries. Defined in `components/weather/HourlyForecast.tsx`. All data arrives via props — no API calls or side effects.
+A reusable display-only Client Component that renders a shadcn Card with an hourly temperature/precipitation trend chart and horizontally scrollable hourly weather entries. Defined in `components/weather/HourlyForecast.tsx`. All data arrives via props — no API calls or side effects.
 
 ## Props
 
@@ -20,7 +20,8 @@ Each item in `hourly` conforms to the `HourlyForecast` type from `@/types/weathe
 ## Layout
 
 - **CardHeader**: `CardTitle` "Hourly Forecast".
-- **CardContent**: A `flex overflow-x-auto pb-2` horizontal scroll container with `role="list"` and `aria-label="Hourly weather forecast"`.
+- **CardContent**: A `ForecastTrendChart` followed by a `flex overflow-x-auto pb-2` horizontal scroll container with `role="list"` and `aria-label="Hourly weather forecast"`.
+- **Trend chart**: Maps displayed hourly rows into one temperature series from `temperature` and one precipitation series from defined `precipitationProbability` values. Missing precipitation probabilities are omitted from the precipitation series. Temperature labels use the selected `unit` through `ForecastTrendChart`.
 - **Each hour entry**: A `min-w-[80px]` flex column (`role="listitem"`) containing:
   - Time label (`text-xs text-muted-foreground`)
   - Weather emoji (`text-2xl`)
@@ -34,6 +35,7 @@ A pure presentational component — all visual states (loading, error, empty) ar
 ## Dependencies
 
 - `@/components/ui/card` (Card, CardHeader, CardTitle, CardContent)
+- `@/components/weather/ForecastTrendChart` (dependency-free SVG trend visualization)
 - `@/types/weather` (HourlyForecast type)
 - `@/hooks/useTemperatureUnit` (`TemperatureUnit` type and `convertTemperature()` display helper)
 - `"use client"` directive for Next.js client-side interactivity
