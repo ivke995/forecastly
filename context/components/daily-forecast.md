@@ -13,25 +13,25 @@ Each item in `daily` conforms to the `DailyForecast` type from `@/types/weather`
 | Field | Source | Display |
 |---|---|---|
 | `date` | String date | Day of week (e.g. "Mon") + full date (e.g. "Jan 15") |
-| `condition.emoji` | Weather emoji | `text-2xl` emoji with `aria-label` from `condition.description` |
+| `condition.emoji` | Weather emoji | Prominent emoji with `aria-label` from `condition.description` |
 | `temperatureMax` | Numeric (°C) | Converted via `convertTemperature()` and labeled as `°C` or `°F` (bold, primary) |
 | `temperatureMin` | Numeric (°C) | Converted via `convertTemperature()` and labeled as `°C` or `°F` (muted, secondary) |
-| `precipitationProbabilityMax` | Numeric (%) | Shown as `N%`; only rendered when defined |
+| `precipitationProbabilityMax` | Numeric (%) | Shown as `N% rain`; only rendered when defined |
 
 ## Layout
 
-- **CardHeader**: `CardTitle` "7-Day Forecast".
+- **CardHeader**: Weather-themed eyebrow plus `CardTitle` "7-Day Forecast".
 - **CardContent**: A `ForecastTrendChart` followed by a responsive forecast container:
 - **Trend chart**: Maps displayed daily rows into high-temperature, low-temperature, and defined-precipitation series. Missing `precipitationProbabilityMax` values are omitted from the precipitation series. Temperature labels use the selected `unit` through `ForecastTrendChart`.
 - **Forecast container**:
-  - **Mobile (< 768px)**: `flex overflow-x-auto` horizontal scroll with individual day cards at `min-w-[100px]`
+  - **Mobile (< 768px)**: `flex overflow-x-auto` horizontal scroll with snap-aligned individual day cards at `min-w-[118px]`
   - **Desktop (≥ 768px)**: `md:grid md:grid-cols-7` grid layout showing all 7 days without scrolling
-- **Each day entry**: A bordered card (`rounded-lg border bg-muted/30 p-3`) containing:
-  - Day label (`text-sm font-medium`)
+- **Each day entry**: A rounded, shadowed forecast tile containing:
+  - Day label
   - Full date (`text-xs text-muted-foreground`)
-  - Weather emoji (`text-2xl`)
+  - Weather emoji
   - Max/min temperature range (max in bold, min muted)
-  - Precipitation probability (`text-xs text-muted-foreground`)
+  - Optional precipitation pill
 
 ## States
 

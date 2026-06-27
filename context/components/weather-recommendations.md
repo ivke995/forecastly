@@ -5,8 +5,8 @@
 ## Contract
 
 - Props: `recommendations: WeatherRecommendation[]` from `lib/weather-recommendations.ts`.
-- Renders a shadcn `Card` titled `Recommendations` with responsive one-column/two-column advice items.
-- Each item uses the recommendation `id` as a stable key and displays its `icon`, `title`, and `description`.
+- Renders a weather-themed shadcn `Card` titled `Recommendations` with a small guidance eyebrow and responsive one-column/two-column advice items.
+- Each item uses the recommendation `id` as a stable key and displays its `icon`, `title`, and `description` in rounded, hoverable advice tiles.
 - Returns `null` when the recommendations list is empty so the home page does not show broken or empty UI.
 
 ## Boundaries

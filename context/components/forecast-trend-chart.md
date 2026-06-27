@@ -24,6 +24,7 @@ Temperature values are converted with `convertTemperature(celsius, unit)` so cha
 ## Rendering and accessibility
 
 - Uses plain SVG paths/circles plus Tailwind classes; no chart package dependency.
+- Includes a subtle SVG grid/background, rounded wrapper, stronger line/point contrast, and pill-style visible legend while preserving the data contract.
 - Visible `figcaption` provides title and description; the SVG references those labels with `aria-labelledby`.
 - Each plotted circle includes a `<title>` with series, point label, and value.
 - A screen-reader-only list exposes every series value in text form.

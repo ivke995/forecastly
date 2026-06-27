@@ -115,12 +115,16 @@ The redesign should focus on product presentation and usability: richer weather-
   - Evidence: Local `node_modules/next/dist/docs/` docs were not present when checked before editing; `npm run lint` passed; `npx tsc --noEmit` passed.
   - Notes: Reworked `CurrentWeatherCard` into a stronger display-only hero card with a prominent temperature/condition summary, rounded weather icon treatment, grouped metric tiles, and accessible risk-badge section. Existing props, `convertTemperature` display behavior, and risk-badge metadata usage were preserved.
 
-- [ ] T07: `Polish forecast sections and charts` (status:todo)
+- [x] T07: `Polish forecast sections and charts` (status:done)
   - Task ID: T07
   - Goal: Apply cohesive dashboard styling to recommendations, hourly forecast, daily forecast, and trend charts while preserving their existing contracts.
   - Boundaries (in/out of scope): In scope — presentation changes in `components/weather/WeatherRecommendations.tsx`, `HourlyForecast.tsx`, `DailyForecast.tsx`, and `ForecastTrendChart.tsx`; improved card hierarchy, scroll affordances, chart contrast, item spacing, and responsive behavior. Out of scope — new chart library, new forecast calculations, service/data changes, changing public prop contracts unless unavoidable.
   - Done when: Recommendation cards, hourly timeline, 7-day cards, and SVG charts visually match the redesigned page; horizontal scroll remains usable on small screens; chart accessible labels and hidden data list remain intact; temperature/precipitation display remains correct.
   - Verification notes (commands or checks): Inspect accessibility attributes in chart and forecast lists; run `npm run lint`; run `npx tsc --noEmit` if available/appropriate.
+  - Completed: 2026-06-26
+  - Files changed: `components/weather/WeatherRecommendations.tsx`, `components/weather/HourlyForecast.tsx`, `components/weather/DailyForecast.tsx`, `components/weather/ForecastTrendChart.tsx`
+  - Evidence: Local `node_modules/next/dist/docs/` docs were not present when checked before editing; chart accessible labels, point titles, and hidden series data list were preserved by inspection; forecast list roles/labels were preserved by inspection; `npm run lint` passed; `npx tsc --noEmit` passed.
+  - Notes: Recommendations, hourly forecast, daily forecast, and dependency-free SVG trend charts now use cohesive weather-dashboard card treatments, stronger visual hierarchy, chart grid/legend contrast, rounded item cards, explicit small-screen horizontal scrolling/snap behavior, and existing selected-unit temperature/precipitation display paths. Public props, data calculations, services, and runtime dependencies were unchanged.
 
 - [ ] T08: `Validate redesign, cleanup, and sync context` (status:todo)
   - Task ID: T08
