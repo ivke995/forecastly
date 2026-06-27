@@ -40,3 +40,6 @@
 - **Weather risk badges helper**: The UI-free deterministic rule utility in `lib/weather-risk-badges.ts`; it exposes `getCurrentWeatherRiskBadges(current: CurrentWeather)` returning current-condition risk badge metadata derived from normalized weather fields for `CurrentWeatherCard` rendering — no rendering, API calls, or side effects.
 - **WeatherRiskBadge**: The typed badge metadata interface from `lib/weather-risk-badges.ts` with stable `id`, `icon`, `label`, `description`, and display `tone` fields.
 - **TemperatureUnit**: The Celsius/Fahrenheit display preference type from `hooks/useTemperatureUnit.ts`; normalized forecast data stays Celsius while UI components convert display values client-side.
+- **tsParticles**: The particle-animation library family installed for planned client-side decorative weather backdrop rendering.
+- **@tsparticles/react**: The React wrapper package for tsParticles; current installed API exports `Particles`, `ParticlesProvider`, and `useParticlesProvider`.
+- **@tsparticles/slim**: The installed slim tsParticles engine bundle used to register common particle features through `loadSlim(engine)` without depending on the full bundle.
