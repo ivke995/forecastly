@@ -126,12 +126,16 @@ The redesign should focus on product presentation and usability: richer weather-
   - Evidence: Local `node_modules/next/dist/docs/` docs were not present when checked before editing; chart accessible labels, point titles, and hidden series data list were preserved by inspection; forecast list roles/labels were preserved by inspection; `npm run lint` passed; `npx tsc --noEmit` passed.
   - Notes: Recommendations, hourly forecast, daily forecast, and dependency-free SVG trend charts now use cohesive weather-dashboard card treatments, stronger visual hierarchy, chart grid/legend contrast, rounded item cards, explicit small-screen horizontal scrolling/snap behavior, and existing selected-unit temperature/precipitation display paths. Public props, data calculations, services, and runtime dependencies were unchanged.
 
-- [ ] T08: `Validate redesign, cleanup, and sync context` (status:todo)
+- [x] T08: `Validate redesign, cleanup, and sync context` (status:done)
   - Task ID: T08
   - Goal: Validate the completed redesign/favorites integration and update SCE context to current state.
   - Boundaries (in/out of scope): In scope — run full available checks, remove temporary/debug artifacts, update this plan with evidence, and sync durable context files that describe the home page, architecture/patterns if changed, favorites integration, and relevant components. Out of scope — new product features, additional visual redesign beyond bug fixes needed for validation, unrelated refactors.
   - Done when: `npm run lint` passes; `npm run build` passes; `npx tsc --noEmit` is run if useful and passes or its absence/duplication is documented; no temporary scaffolding remains; `context/overview.md`, `context/architecture.md`, `context/app/home-page.md`, `context/components/*`, `context/hooks/use-favorites.md`, `context/components/shadcn-ui.md`, and `context/context-map.md` are verified or updated as needed; the older `favorite-cities` plan no longer misrepresents remaining integration work.
   - Verification notes (commands or checks): `npm run lint`; `npm run build`; optional `npx tsc --noEmit`; inspect relevant context files; update validation evidence in this plan.
+  - Completed: 2026-06-27
+  - Files changed: `context/plans/favorite-cities.md`, `context/plans/homepage-redesign-favorites.md`
+  - Evidence: `npm run lint` passed; `npx tsc --noEmit` passed; `npm run build` passed with Next.js 16.2.7/Turbopack. Searched `app/` and `components/` for `console.`, `debugger`, `TODO`, `FIXME`, `TEMP`, `temporary`, and `scaffold`; no matches found. Verified current-state context coverage for overview, architecture, home page, shadcn/ui, favorites hook, FavoriteCities, CurrentWeatherCard, WeatherRecommendations, HourlyForecast, DailyForecast, ForecastTrendChart, and context map. Reconciled the older `favorite-cities` plan so its previously unchecked integration/validation tasks are marked completed via this homepage redesign/favorites plan.
+  - Notes: No code edits were needed during validation. Durable context already reflected the completed redesign and favorites integration; only plan reconciliation/status evidence was updated before the required context-sync pass.
 
 ## Open questions
 
@@ -143,3 +147,43 @@ None blocking. Assumptions for implementation:
 - Navigation sidebar items should prioritize useful current single-page destinations/sections: Dashboard/Search, Current Weather, Hourly Forecast, 7-Day Forecast, Favorites. Settings/About should not become real routes in this plan unless explicitly requested later.
 - Keep visual style weather-themed, modern, responsive, and accessible; exact color values and spacing can be chosen during implementation within existing Tailwind/shadcn conventions.
 - Finish favorites integration in this plan rather than continuing it through the older `context/plans/favorite-cities.md` plan.
+
+## Validation Report
+
+### Commands run
+
+- `npm run lint` -> exit 0; ESLint completed with no reported issues.
+- `npx tsc --noEmit` -> exit 0; TypeScript completed with no reported issues.
+- `npm run build` -> exit 0; Next.js 16.2.7/Turbopack compiled successfully, completed TypeScript, collected page data, generated static pages for `/` and `/_not-found`, and finalized page optimization.
+
+No primary test-suite command was available: `package.json` defines `dev`, `build`, `start`, and `lint` only, and no `.github/workflows/` CI workflow was present to indicate an alternate test command.
+
+### Cleanup and context verification
+
+- Searched `app/` and `components/` for `console.`, `debugger`, `TODO`, `FIXME`, `TEMP`, `temporary`, and `scaffold`; no matches found.
+- Verified durable current-state context coverage for the redesigned app shell/home page, favorites integration, shadcn sidebar primitives, weather display components, charts, recommendations, and favorites hook.
+- Reconciled `context/plans/favorite-cities.md` so it no longer reports remaining favorite-city integration/validation work.
+- `sce-context-sync` classification: verify-only. No code behavior changed during T08; root context and domain/component docs already matched current code truth.
+
+### Success-criteria verification
+
+- [x] Weather-app visual identity is documented and implemented via `app/globals.css`, `app/layout.tsx`, `app/page.tsx`, and weather component presentation context.
+- [x] Weather-themed light/dark tokens are represented in `app/globals.css` and documented in `context/overview.md`, `context/architecture.md`, `context/patterns.md`, and `context/components/shadcn-ui.md`.
+- [x] Official shadcn sidebar primitives exist under `components/ui/` and are documented in `context/components/shadcn-ui.md`.
+- [x] Sidebar-based shared shell exists in `app/layout.tsx` and is documented in `context/architecture.md`.
+- [x] Dashboard/Search, Current, Hourly, 7-Day, Favorites, and disabled Settings navigation behavior is documented in `context/overview.md` and `context/architecture.md`.
+- [x] Home page responsive dashboard, onboarding/search, state handling, selected forecast layout, unit toggle, favorite toggle, current/recommendations/hourly/daily/favorites composition, and no-refetch unit switching are documented in `context/app/home-page.md`.
+- [x] Favorites integration is complete: selected-city star toggle uses `useFavorites()`, `FavoriteCities` is mounted, and favorite selection routes through `handleCitySelect`; documented in `context/app/home-page.md`, `context/hooks/use-favorites.md`, and `context/components/favorite-cities.md`.
+- [x] Weather display components remain display-only and documented in `context/components/current-weather-card.md`, `context/components/weather-recommendations.md`, `context/components/hourly-forecast.md`, `context/components/daily-forecast.md`, and `context/components/forecast-trend-chart.md`.
+- [x] No new runtime dependencies were introduced during final validation.
+- [x] Existing service modules and domain contracts were not redesigned during this plan's final validation.
+- [x] `npm run lint`, `npx tsc --noEmit`, and `npm run build` passed.
+- [x] Context sync completed and plan evidence was updated.
+
+### Failed checks and follow-ups
+
+None.
+
+### Residual risks
+
+- No automated app interaction/e2e test suite exists, so favorites/geolocation/search interactions were validated by type/lint/build checks and code/context inspection rather than browser automation.
