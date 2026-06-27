@@ -1,6 +1,6 @@
 # Favorite Cities
 
-> Remaining home-page integration work from this plan is superseded by `context/plans/homepage-redesign-favorites.md`, which combines favorites integration with the selected homepage redesign scope. Keep this file as historical task context for the already-created hook/component until final validation reconciles active plan state.
+> Completed/superseded plan. The remaining home-page integration and validation work from this original plan was completed by `context/plans/homepage-redesign-favorites.md`, which combined favorites integration with the selected homepage redesign scope. Keep this file as historical task context only; durable current state lives in `context/hooks/use-favorites.md`, `context/components/favorite-cities.md`, and `context/app/home-page.md`.
 
 ## Change summary
 
@@ -79,7 +79,7 @@ This plan adds:
   - **Files changed:** `components/city/FavoriteCities.tsx`
   - **Evidence:** `npx tsc --noEmit` clean, `npm run lint` clean
 
-- [ ] T03: `Integrate favorites into app/page.tsx` (status:todo)
+- [x] T03: `Integrate favorites into app/page.tsx` (status:done via `homepage-redesign-favorites` T05)
   - Task ID: T03
   - Goal: Wire the `useFavorites` hook and `FavoriteCities` component into the home page so users can star/unstar the selected city and see their favorites list.
   - Boundaries (in/out of scope):
@@ -92,8 +92,12 @@ This plan adds:
     - The star button is hidden when no city is selected.
     - TypeScript compiles without errors; linting passes.
   - Verification notes (commands or checks): `npx tsc --noEmit` passes; `npm run lint` passes; `npm run build` passes; manual review.
+  - **Completed:** 2026-06-26 via `context/plans/homepage-redesign-favorites.md` T05
+  - **Files changed:** `app/page.tsx`
+  - **Evidence:** `npm run lint` passed; `npx tsc --noEmit` passed during T05. Final validation in `homepage-redesign-favorites` T08 also passed `npm run lint`, `npx tsc --noEmit`, and `npm run build`.
+  - **Notes:** Home page now renders an accessible selected-city star toggle backed by `useFavorites()` and mounts `<FavoriteCities onSelect={handleCitySelect} />` in the selected forecast dashboard so favorite selection uses the same weather-fetch path as city search.
 
-- [ ] T04: `Validate build, cleanup, and sync context` (status:todo)
+- [x] T04: `Validate build, cleanup, and sync context` (status:done via `homepage-redesign-favorites` T08)
   - Task ID: T04
   - Goal: Confirm the project builds cleanly with all changes, no regressions, and context files are updated to reflect the new hook and component.
   - Boundaries (in/out of scope):
@@ -101,6 +105,10 @@ This plan adds:
     - Out — new features, modifying existing components, adding tests.
   - Done when: All three commands pass; `context/context-map.md` includes `hooks/useFavorites.md` and `components/city/FavoriteCities.md` entries; `context/components/favorite-cities.md` exists documenting the component.
   - Verification notes (commands or checks): `npm run lint`; `npx tsc --noEmit`; `npm run build`; inspect `context/context-map.md`; inspect `context/components/favorite-cities.md`.
+  - **Completed:** 2026-06-27 via `context/plans/homepage-redesign-favorites.md` T08
+  - **Files changed:** `context/plans/favorite-cities.md`, plus context verification/sync recorded in `homepage-redesign-favorites` T08
+  - **Evidence:** `npm run lint` passed; `npx tsc --noEmit` passed; `npm run build` passed. `context/context-map.md`, `context/hooks/use-favorites.md`, `context/components/favorite-cities.md`, and `context/app/home-page.md` already describe the completed favorites integration.
+  - **Notes:** This original plan is no longer active; remaining work was reconciled by the homepage redesign/favorites plan.
 
 ## Open questions
 
