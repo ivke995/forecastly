@@ -13,20 +13,20 @@ Each item in `hourly` conforms to the `HourlyForecast` type from `@/types/weathe
 | Field | Source | Display |
 |---|---|---|
 | `time` | ISO string | Formatted hour via `Intl.DateTimeFormat` ("2 PM") |
-| `condition.emoji` | Weather emoji | `text-2xl` emoji with `aria-label` from `condition.description` |
+| `condition.emoji` | Weather emoji | Prominent emoji with `aria-label` from `condition.description` |
 | `temperature` | Numeric (°C) | Converted via `convertTemperature()` and labeled as `°C` or `°F` |
-| `precipitationProbability` | Numeric (%) | Shown as `N%`; only rendered when defined |
+| `precipitationProbability` | Numeric (%) | Shown as `N% rain`; only rendered when defined |
 
 ## Layout
 
-- **CardHeader**: `CardTitle` "Hourly Forecast".
-- **CardContent**: A `ForecastTrendChart` followed by a `flex overflow-x-auto pb-2` horizontal scroll container with `role="list"` and `aria-label="Hourly weather forecast"`.
+- **CardHeader**: Weather-themed eyebrow plus `CardTitle` "Hourly Forecast".
+- **CardContent**: A `ForecastTrendChart` followed by a `Timeline` label and a rounded `flex overflow-x-auto`/snap horizontal scroll container with `role="list"` and `aria-label="Hourly weather forecast"`.
 - **Trend chart**: Maps displayed hourly rows into one temperature series from `temperature` and one precipitation series from defined `precipitationProbability` values. Missing precipitation probabilities are omitted from the precipitation series. Temperature labels use the selected `unit` through `ForecastTrendChart`.
-- **Each hour entry**: A `min-w-[80px]` flex column (`role="listitem"`) containing:
-  - Time label (`text-xs text-muted-foreground`)
-  - Weather emoji (`text-2xl`)
-  - Temperature (`text-sm font-semibold`)
-  - Precipitation probability (`text-xs text-muted-foreground`)
+- **Each hour entry**: A rounded, shadowed snap card (`role="listitem"`) containing:
+  - Time label
+  - Weather emoji
+  - Converted temperature
+  - Optional precipitation pill
 
 ## States
 

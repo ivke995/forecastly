@@ -56,8 +56,8 @@ const FLAT_RANGE_PADDING = 1;
 
 const SERIES_TONE_CLASSES: Record<ForecastTrendTone, string> = {
   primary: "stroke-primary text-primary",
-  secondary: "stroke-sky-500 text-sky-600 dark:text-sky-400",
-  muted: "stroke-muted-foreground text-muted-foreground",
+  secondary: "stroke-sky-500 text-sky-600 dark:text-sky-300",
+  muted: "stroke-amber-500 text-amber-600 dark:text-amber-300",
 };
 
 function isFiniteNumber(value: number): boolean {
@@ -199,15 +199,15 @@ export default function ForecastTrendChart({
   return (
     <figure
       className={cn(
-        "rounded-lg border border-foreground/10 bg-muted/20 p-4",
+        "rounded-2xl border border-border/70 bg-background/70 p-4 shadow-inner",
         className,
       )}
     >
-      <figcaption className="space-y-1">
-        <h3 id={titleId} className="text-sm font-semibold">
+      <figcaption className="space-y-1.5">
+        <h3 id={titleId} className="text-sm font-semibold tracking-tight">
           {title}
         </h3>
-        <p id={descriptionId} className="text-xs text-muted-foreground">
+        <p id={descriptionId} className="max-w-2xl text-xs leading-relaxed text-muted-foreground">
           {description}
         </p>
       </figcaption>
@@ -215,11 +215,34 @@ export default function ForecastTrendChart({
       {hasData ? (
         <>
           <svg
-            className="mt-4 h-44 w-full overflow-visible"
+            className="mt-5 h-48 w-full overflow-visible rounded-xl bg-gradient-to-b from-background/70 to-muted/20 p-1"
             viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
             role="img"
             aria-labelledby={`${titleId} ${descriptionId}`}
           >
+            <defs>
+              <pattern
+                id={`${componentId}-grid`}
+                width="80"
+                height="44"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 80 0 L 0 0 0 44"
+                  fill="none"
+                  className="stroke-border/60"
+                  strokeWidth="1"
+                />
+              </pattern>
+            </defs>
+            <rect
+              x={PADDING}
+              y={PADDING}
+              width={WIDTH - PADDING * 2}
+              height={HEIGHT - PADDING * 2}
+              fill={`url(#${componentId}-grid)`}
+              opacity="0.65"
+            />
             <line
               x1={PADDING}
               x2={WIDTH - PADDING}
@@ -249,7 +272,7 @@ export default function ForecastTrendChart({
                   <path
                     d={pathFromPoints(series.points)}
                     fill="none"
-                    strokeWidth="3"
+                    strokeWidth="4"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -259,9 +282,9 @@ export default function ForecastTrendChart({
                     key={`${series.id}-${point.label}-${point.x}`}
                     cx={point.x}
                     cy={point.y}
-                    r="3"
-                    className="fill-background"
-                    strokeWidth="2"
+                    r="4"
+                    className="fill-background drop-shadow-sm"
+                    strokeWidth="2.5"
                   >
                     <title>
                       {series.label}, {point.label}: {point.value}
@@ -273,13 +296,16 @@ export default function ForecastTrendChart({
             ))}
           </svg>
           <div
-            className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground"
+            className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground"
             aria-hidden="true"
           >
             {preparedSeries.map((series) => (
               <span
                 key={series.id}
-                className={cn("inline-flex items-center gap-1.5", series.className)}
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-full border border-current/15 bg-background/70 px-2.5 py-1 font-medium",
+                  series.className,
+                )}
               >
                 <span className="h-2 w-2 rounded-full bg-current" />
                 {series.label}
